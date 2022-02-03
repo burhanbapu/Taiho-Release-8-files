@@ -12,7 +12,8 @@ WITH included_studies AS (
                         						'Count'::text AS statsubcat,
                         						count(*)::NUMERIC AS statval,
                         						'Count'::text AS statunit
-                						from tas120_204_ctms.site_visits
+                        				from tas120_204_ctms.site_visits
+                						where visit_status in ('Complete','Projected','Scheduled')
                 						group by 1,2,3,5
                 					)
 
