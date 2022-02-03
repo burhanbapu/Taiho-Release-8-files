@@ -9,25 +9,28 @@ WITH included_studies AS (
                 
     studymilestoneseq as (
                select sm.milestone_name as milestonelabel, 
-					   case when sm.milestone_name = 'Contract Executed' then 1
-							when sm.milestone_name = 'Hand-off Meeting' then 2
-							when sm.milestone_name = 'Final Protocol Received' then 3
-							when sm.milestone_name = 'Planned CRF/eCRF Date' then 4
-							when sm.milestone_name = 'Final CRF Specifications Complete' then 5
-							when sm.milestone_name = 'Database Go Live' then 6
-							when sm.milestone_name = 'First Site Activated' then 7
-							when sm.milestone_name = 'First Subject Screened' then 8
-							when sm.milestone_name = 'First Subject Enrolled' then 9
-							when sm.milestone_name = 'Last Site Activated' then 10
-							when sm.milestone_name = 'First Subject Complete Expansion' then 11
-							when sm.milestone_name = 'Last Subject Enrolled' then 12
-							when sm.milestone_name = 'Last Subject Last Visit' then 13
-							when sm.milestone_name = 'Database Lock' then 14
-							when sm.milestone_name = 'Close Out Visits Complete' then 15
-							when sm.milestone_name = 'Final TLFs Complete' then 16
-							when sm.milestone_name = 'Final TLFs sent to Sponsor' then 17
-							when sm.milestone_name = 'TMF Transfer' then 18
-							when sm.milestone_name = 'Operationally Complete' then 19 
+					   case when sm.milestone_name = 'Hand-off Meeting' then 1
+							when sm.milestone_name = 'First Billable Hour' then 2
+							when sm.milestone_name = 'Contract Executed' then 3
+							when sm.milestone_name = 'Final Protocol Received' then 4
+							when sm.milestone_name = 'Planned CRF/eCRF Date' then 5
+							when sm.milestone_name = 'QuickStart Camp Complete' then 6
+							when sm.milestone_name = 'Final CRF Specifications Complete' then 7
+							when sm.milestone_name = 'IXRS Database Go Live' then 8
+							when sm.milestone_name = 'Database Go Live' then 9
+							when sm.milestone_name = 'First Site Activated' then 10
+							when sm.milestone_name = 'First Subject Screened' then 11
+							when sm.milestone_name = 'Last Site Activated' then 12
+							when sm.milestone_name = 'First Subject Enrolled' then 13
+							when sm.milestone_name = 'First Subject Complete' then 14
+							when sm.milestone_name = 'Last Subject Enrolled' then 15
+							when sm.milestone_name = 'QualityFinish Camp Complete' then 16
+							when sm.milestone_name = 'Last Subject Last Visit' then 17
+							when sm.milestone_name = 'Database Lock' then 18
+							when sm.milestone_name = 'Close Out Visits Complete' then 19
+							when sm.milestone_name = 'TMF Transfer' then 20
+							when sm.milestone_name = 'Operationally Complete' then 21
+							
 							 
  
 					   end::int AS milestoneseq 
