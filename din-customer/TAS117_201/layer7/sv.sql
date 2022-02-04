@@ -145,3 +145,8 @@ JOIN included_subjects s ON (sv.studyid = s.studyid AND sv.siteid = s.siteid AND
 LEFT JOIN included_sites si ON (sv.studyid = si.studyid AND sv.siteid = si.siteid)
 ;
 
+
+
+
+
+
