@@ -69,25 +69,48 @@ WITH included_sites AS (
 					left join internal_config.taiho_ms_standards tms on upper(start_original_label) = upper(milestone_name)
 					where tms.milestonelevel = 'Site'
 	union 
-	Select sm.*,tms.endmilestonecycletime_standard:: text as endmilestonecycletime from(
+	Select sm.*,tms.endmilestonecycletime_standard:: text as endmilestonecycletime 
+	from(
+			select studyid,
+				   studyname,
+				   siteid,
+				   milestoneseq,
+				   milestonelabel,
+				   milestonetype,
+				   min(expecteddate) as expecteddate,
+				   ismandatory,
+				   milestonebucketid,
+				   milestonebucketname,
+				   iskeymilestone,
+				   startkeymilestone,
+				   milestoneid,
+				   milestonelabel_src,
+				   milestonelabel_long,
+				   milestonecat
+	   
+			from (	   
 					select distinct	'TAS120_204'::text AS studyid,
-						'TAS120_204'::text AS studyname,
-                        concat('TAS120_204_',split_part (ex."SiteNumber" ,'_',2))::text AS siteid,
-                        999::int AS milestoneseq,
-                        'FIRST SUBJECT IN'::text AS milestonelabel,
-                        'Actual'::text AS milestonetype,
-                         min("EXOSTDAT")::date AS expecteddate,
-                        'yes'::boolean AS ismandatory,
-						'Startup':: text as milestonebucketid,
-						'Study Startup':: text as milestonebucketname,
-						true::boolean as iskeymilestone,
-						'yes'::text as startkeymilestone,
-						'MS999':: text as milestoneid,
-						'FIRST SUBJECT IN':: text as milestonelabel_src,
-						'FIRST SUBJECT IN':: text as milestonelabel_long,
-						null::text AS milestonecat
-						
-					from tas120_204."EXO" ex
+									'TAS120_204'::text AS studyname,
+									concat('TAS120_204_',split_part (ex."SiteNumber" ,'_',2))::text AS siteid,
+									999::int AS milestoneseq,
+									'FIRST SUBJECT IN'::text AS milestonelabel,
+									'Actual'::text AS milestonetype,
+									case when lower("EXOADJYN")= 'yes' then "EXOSTDAT"
+										else "EXOCYCSDT"
+									end::date AS expecteddate,
+                       '			yes'::boolean AS ismandatory,
+									'Startup':: text as milestonebucketid,
+									'Study Startup':: text as milestonebucketname,
+									true::boolean as iskeymilestone,
+									'yes'::text as startkeymilestone,
+									'MS999':: text as milestoneid,
+									'FIRST SUBJECT IN':: text as milestonelabel_src,
+									'FIRST SUBJECT IN':: text as milestonelabel_long,
+									null::text AS milestonecat
+					from tas120_204."EXO" ex						
+	
+				)e 
+	
 					group by 1,2,3,4,5,6,8,9,10,11,12,13,14,15,16					
 					)sm
 					left join (Select replace (tms.start_standard_label,'FIRST SUBJECT FIRST TREATMENT','FIRST SUBJECT IN') as start_standard_label1, tms.endmilestonecycletime_standard 

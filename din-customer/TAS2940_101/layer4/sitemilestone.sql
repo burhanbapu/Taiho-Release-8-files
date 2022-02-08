@@ -75,10 +75,14 @@ WITH included_sites AS (
                         left join 
                         internal_config.taiho_ms_standards tms
                         on upper(mss.event_desc)=upper(tms.start_original_label)
-                        left join(  select min("EXOSTDAT")::date as Exosdat,"SiteNumber" from tas2940_101."EXO" 
- 					group by "SiteNumber") gf
-  					on concat('TAS2940_101_',mss.site_number) = concat('TAS2940_101_',split_part(gf."SiteNumber",'_',2))
- 					where tms.milestonelevel = 'Site'
+                        left join(  select min(Exosdat) as Exosdat,"SiteNumber" 
+									from(
+											select  case when lower("EXOADJYN")= 'yes' then "EXOSTDAT"
+														else "EXOCYCSDT"
+													end::date as Exosdat,"SiteNumber" from tas2940_101."EXO" 
+										)r group by "SiteNumber") gf
+						on concat('TAS2940_101_',mss.site_number) = concat('TAS2940_101_',split_part(gf."SiteNumber",'_',2))
+						where tms.milestonelevel = 'Site'
                         )sm
                         )
 
