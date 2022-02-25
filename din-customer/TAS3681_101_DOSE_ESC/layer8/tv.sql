@@ -15,6 +15,50 @@ tv_scheduled AS (
 ),
 
 tv_data AS (
+
+			select distinct  studyid,
+				   visitnum,
+				   visit,
+				   visitdy,
+				   visitwindowbefore,
+				   visitwindowafter
+				   ,case when ((lower(visit) like '%day 1' OR lower(visit) like 'day 1 %' 
+OR lower(visit) like '% day 1 %' OR lower(visit) like '% day 1<%') or (lower(visit) like '%day 01' OR lower(visit) like 'day 01 %' 
+OR lower(visit) like '% day 01 %' OR lower(visit) like '% day 01<%') or (lower(visit) like '%day 1-%') or (lower(visit) like '%day 01-%')) then 'True' else null end as isbaselinevisit
+
+			from(	   
+			select studyid,
+				   visitnum,
+				   trim(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(REGEXP_REPLACE
+					(visit,'<WK[0-9]D[0-9]/>\sEscalation','')
+								,'<WK[0-9]D[0-9][0-9]/>\sEscalation','')
+								,'<WK[0-9]DA[0-9]/>\sEscalation','')
+								,'<WK[0-9]DA[0-9][0-9]/>\sEscalation','')
+								,'<W[0-9]DA[0-9]/>\sEscalation','')
+								,'<W[0-9]DA[0-9][0-9]/>\sEscalation','')
+								,' Escalation','')
+								,'\s\([0-9][0-9]\)','')
+								,'\s\([0-9]\)','')
+								,' [0-9]\s[A-Z][a-z][a-z]\s[0-9][0-9][0-9][0-9]','')
+								,' [0-9][0-9]\s[A-Z][a-z][a-z]\s[0-9][0-9][0-9][0-9]','')
+				    ) as visit,
+				   visitdy,
+				   visitwindowbefore,
+				   visitwindowafter
+			from(	   
+				   
+
+
 	select distinct
 		'TAS3681_101_DOSE_ESC'::text AS studyid,
 		visitnum::numeric AS visitnum,
@@ -47,8 +91,8 @@ tv_data AS (
 	FROM formdata 
 	WHERE (studyid, visit) NOT IN (SELECT DISTINCT studyid, visit FROM sv) 
 	AND (studyid, visit) NOT IN (SELECT studyid, visit FROM tv_scheduled)
-  
-	
+  )i
+	)o
 )
 
 SELECT
@@ -59,10 +103,12 @@ SELECT
 	tv.visitdy::int AS visitdy,
 	tv.visitwindowbefore::int AS visitwindowbefore,
 	tv.visitwindowafter::int AS visitwindowafter,
-	null::boolean AS isbaselinevisit,
+	tv.isbaselinevisit::boolean AS isbaselinevisit,
 	'True'::boolean as isvisible
 	/*KEY , (tv.studyid || '~' || tv.visit)::text  AS objectuniquekey KEY*/
 	/*KEY , now()::timestamp without time zone AS comprehend_update_time KEY*/
 FROM tv_data tv
-JOIN included_studies st ON (st.studyid = tv.studyid);
+JOIN included_studies st ON (st.studyid = tv.studyid)
+;
+
 

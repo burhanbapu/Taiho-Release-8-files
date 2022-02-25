@@ -15,7 +15,16 @@ tv_scheduled AS (
 ),
 
 tv_data AS (
-select studyid,visitnum,visit,visitdy,visitwindowafter,visitwindowbefore from (
+select studyid,
+visitnum,
+visit,
+visitdy,
+visitwindowafter,
+visitwindowbefore
+,case when ((lower(visit) like '%day 1' OR lower(visit) like 'day 1 %' 
+OR lower(visit) like '% day 1 %' OR lower(visit) like '% day 1<%') or (lower(visit) like '%day 01' OR lower(visit) like 'day 01 %' 
+OR lower(visit) like '% day 01 %' OR lower(visit) like '% day 01<%') or (lower(visit) like '%day 1-%') or (lower(visit) like '%day 01-%')) then 'True' else null end as isbaselinevisit
+from (
 	SELECT
 		'TAS0612_101'::text AS studyid,
 		visitnum::numeric AS visitnum,
@@ -62,10 +71,13 @@ SELECT
 	tv.visitdy::int AS visitdy,
 	tv.visitwindowbefore::int AS visitwindowbefore,
 	tv.visitwindowafter::int AS visitwindowafter,
-	null::boolean AS isbaselinevisit,
+	tv.isbaselinevisit::boolean AS isbaselinevisit,
 	'True'::boolean as isvisible
 	/*KEY , (tv.studyid || '~' || tv.visit)::text  AS objectuniquekey KEY*/
 	/*KEY , now()::timestamp without time zone AS comprehend_update_time KEY*/
 FROM tv_data tv
 JOIN included_studies st ON (st.studyid = tv.studyid);
+
+
+
 
