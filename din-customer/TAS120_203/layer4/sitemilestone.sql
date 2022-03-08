@@ -100,7 +100,7 @@ and column_name not in ('__dq_flag','__generation_time','__hash','id_','comprehe
                         tms.ismandatory::boolean AS startkeymilestone
                         from tas120_203_ctms.site_milestones sm
                         join milestonelabel ml ON(ml.studyid='TAS120_203')
-                        join internal_config.taiho_ms_standards_bkp_25022022 tms
+                        join internal_config.taiho_ms_standards tms
                         on upper(tms.start_original_label) = upper(ml.milestonelabel)
                         where tms.milestonelevel = 'Site'
                         )a 
