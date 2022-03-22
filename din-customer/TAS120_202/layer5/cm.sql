@@ -33,7 +33,10 @@ WITH included_subjects AS (
 							else to_date(cmendtc,'DD Mon YYYY') 
 						end ::timestamp without time zone AS cmendtc,
                         null::time without time zone AS cmsttm,
-                        null::time without time zone AS cmentm
+                        null::time without time zone AS cmentm,
+						"CMTRT_ATC"::text As CMATCTXT1,
+						"CMTRT_ATC2"::text As CMATCTXT2,
+						"CMTRT_ATC3"::text As CMATCTXT3
                 FROM 
 ( select *,concat(replace (replace (substring (upper("CMSTDAT_RAW"),1,2),'UN','01'),'UK','01'),replace(substring(upper("CMSTDAT_RAW"),3),'UNK','Jan')) AS cmstdtc,
 	     concat(replace(replace(substring(upper("CMENDAT_RAW"),1,2),'UN','01'),'UK','01'),replace(substring(upper("CMENDAT_RAW"),3),'UNK','Jan')) AS cmendtc
@@ -72,7 +75,10 @@ SELECT
         null::text AS cmendtc_iso,
         cm.cmendtc::timestamp without time zone AS cmendtc,
         cm.cmsttm::time without time zone AS cmsttm,
-        cm.cmentm::time without time zone AS cmentm
+        cm.cmentm::time without time zone AS cmentm,
+		CMATCTXT1::text As CMATCTXT1,
+		CMATCTXT2::text As CMATCTXT2,
+		CMATCTXT3::text As CMATCTXT3
         /*KEY , (cm.studyid || '~' || cm.siteid || '~' || cm.usubjid || '~' || cm.cmseq)::text  AS objectuniquekey KEY*/
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM cm_data cm

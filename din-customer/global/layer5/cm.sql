@@ -36,7 +36,10 @@ WITH included_subjects AS (
                         null::text AS cmendtc_iso,
                         null::timestamp without time zone AS cmendtc,
                         null::time without time zone AS cmsttm,
-                        null::time without time zone AS cmentm )
+                        null::time without time zone AS cmentm,
+						null::text As CMATCTXT1,
+						null::text As CMATCTXT2,
+						null::text As CMATCTXT3						)
 
 SELECT 
         /*KEY (cm.studyid || '~' || cm.siteid || '~' || cm.usubjid)::text AS comprehendid, KEY*/
@@ -69,7 +72,10 @@ SELECT
         cm.cmendtc_iso::text AS cmendtc_iso,
         cm.cmendtc::timestamp without time zone AS cmendtc,
         cm.cmsttm::time without time zone AS cmsttm,
-        cm.cmentm::time without time zone AS cmentm
+        cm.cmentm::time without time zone AS cmentm,
+		cm.CMATCTXT1::text As CMATCTXT1,
+		cm.CMATCTXT2::text As CMATCTXT2,
+		cm.CMATCTXT3::text As CMATCTXT3
         /*KEY , (cm.studyid || '~' || cm.siteid || '~' || cm.usubjid || '~' || cm.cmseq)::text  AS objectuniquekey KEY*/
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM cm_data cm

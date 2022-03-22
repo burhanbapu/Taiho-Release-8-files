@@ -19,7 +19,12 @@ WITH included_studies AS (
                         null::text AS milestonestartdate,
                         null::text AS milestoneenddate,
                         null::boolean AS ismandatory,
-                        null::boolean AS iscriticalpath)
+                        null::boolean AS iscriticalpath,
+						null::text AS studyname,
+						null::text AS milestonebucketid,
+						null::text AS milestonebucketname,
+						null::boolean AS iskeymilestone,
+						null::text AS endmilestonecycletime)
 
 SELECT 
         /*KEY (cm.studyid || '~' || cm.cohortid)::text AS comprehendid, KEY*/
@@ -35,7 +40,12 @@ SELECT
         cm.milestonestartdate::text AS milestonestartdate,
         cm.milestoneenddate::text AS milestoneenddate,
         cm.ismandatory::boolean AS ismandatory,
-        cm.iscriticalpath::boolean AS iscriticalpath
+        cm.iscriticalpath::boolean AS iscriticalpath,
+		cm.studyname::text AS studyname,
+		cm.milestonebucketid::text AS milestonebucketid,
+		cm.milestonebucketname::text AS milestonebucketname,
+		cm.iskeymilestone::boolean AS iskeymilestone,
+		cm.endmilestonecycletime::text AS endmilestonecycletime
         /*KEY , (cm.studyid || '~' || cm.cohortid || '~' || cm.milestonelabel_short || '~' || cm.milestonetype)::text  AS objectuniquekey KEY*/
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM cohortmilestones_data cm

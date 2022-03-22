@@ -18,7 +18,7 @@ WITH included_subjects AS (
                         "MHTERM_SOC_CD"::text AS mhbodsys,
                         null::time without time zone AS mhsttm,
                         null::time without time zone AS mhendtm,
-                        case when mhstdtc='' or mhstdtc like '%0000%' then null
+                        case when mhstdtc='' or mhstdtc like '%0000%' or mhstdtc like '%YYYY%' then null
 							else to_date(mhstdtc,'DD Mon YYYY') 
 						end ::date AS mhstdtc,
 						case when mhendtc='' or mhendtc like '%0000%' then null

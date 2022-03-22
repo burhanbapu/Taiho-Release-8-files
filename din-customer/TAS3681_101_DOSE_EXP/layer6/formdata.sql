@@ -11,7 +11,12 @@ WITH form_data AS (
     fd.usubjid AS usubjid,
     fd.formid AS formid,
     fd.formseq AS formseq,
-    fd.visit AS visit,
+    --fd.visit AS visit,
+trim(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE
+	(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(fd.visit,'<WK[0-9]DA[0-9]/>\sExpansion',''),'<WK[0-9]DA[0-9][0-9]/>\sExpansion','')
+	,'<W[0-9]DA[0-9]/>\sExpansion',''),'<W[0-9]DA[0-9][0-9]/>\sExpansion',''),'<WK[0-9]D[0-9]/>\sEscalation','')
+	,'<WK[0-9]D[0-9][0-9]/>\sEscalation',''),' Escalation ',' '),'\s\([0-9]\)',''),' [0-9][0-9]\s[A-Z][a-z][a-z]\s[0-9][0-9][0-9][0-9]','')
+	,' [0-9]\s[A-Z][a-z][a-z]\s[0-9][0-9][0-9][0-9]',''),'\s\([0-9][0-9]\)',''),'\s\([0-9]\)',''),'\sExpansion',''))::text AS visit,
     fd.visitseq AS visitseq,
     MIN(fd.dataentrydate) AS dataentrydate,
     MIN(fd.datacollecteddate) AS datacollecteddate,

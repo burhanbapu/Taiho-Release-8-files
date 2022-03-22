@@ -7,12 +7,22 @@ WITH included_sites AS (
                 SELECT DISTINCT studyid, siteid FROM site ),
 
      sitemonitoringvisitschedule_data AS (
-               SELECT distinct 'TAS120_203'::text AS studyid,
-                        concat('TAS120_203_',"site_number")::text AS siteid,
-						 visit_type||'~' || row_number() OVER(partition by "visit_type","site_number" ORDER BY "start_date_of_conducted_visit" ASC)::text AS visitname,
-						 coalesce(nullif("planned_visit_date"::text,''),nullif("start_date_of_conducted_visit"::text,''))::date AS plannedvisitdate,
-						 "visit_type"::text as smvvtype
-				 from tas120_203_ctms.study_visit)
+				select studyid,
+					   siteid,
+					   visitname||'~'||row_number() over(partition by visitname,siteid ORDER by startdate,smvvtype ASC) as visitname,
+					   plannedvisitdate,
+					   smvvtype
+				from (
+						SELECT distinct 'TAS120_203'::text AS studyid,
+										concat('TAS120_203_',"site_number")::text AS siteid,
+										visit_type::text AS visitname,
+										coalesce(nullif("planned_visit_date"::text,''),nullif("start_date_of_conducted_visit"::text,''))::date AS plannedvisitdate,
+										"visit_type"::text as smvvtype,
+										start_date_of_conducted_visit as startdate
+						from tas120_203_ctms.study_visit
+				 
+						)r
+										)
 
 SELECT 
         /*KEY (smvs.studyid || '~' || smvs.siteid)::text AS comprehendid, KEY*/

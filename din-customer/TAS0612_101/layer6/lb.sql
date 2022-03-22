@@ -10,7 +10,14 @@ normlab as(SELECT lb1."project"::text AS studyid,
                         --lb1."SiteNumber"::text AS siteid,
 concat('TAS0612_101_',split_part(lb1."SiteNumber",'_',2))::text AS siteid,
    lb1."Subject"::text    AS usubjid,
-                        REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE(lb1."InstanceName",'<WK[0-9]D[0-9]/>\sEscalation',''),'<WK[0-9]D[0-9][0-9]/>\sEscalation',''),'Escalation',''):: text as visit,
+                        trim(REGEXP_REPLACE
+						(REGEXP_REPLACE
+						(REGEXP_REPLACE
+						(REGEXP_REPLACE
+						(lb1."InstanceName",'\s\([0-9][0-9]\)','')
+									   ,'\s\([0-9]\)','')
+									   ,' [0-9]\s[A-Z][a-z][a-z]\s[0-9][0-9][0-9][0-9]','')
+									   ,' [0-9][0-9]\s[A-Z][a-z][a-z]\s[0-9][0-9][0-9][0-9]','')):: text as visit,
 CASE
 WHEN lb1."DataPageName" like '%Chemistry%' THEN max(chem."LBDAT")
 WHEN lb1."DataPageName" like '%Hematology%' THEN max(hem."LBDAT")
@@ -30,7 +37,7 @@ Null::text AS lbscat,
                        lb1."AnalyteValue"::text AS lborres,
                         null::text AS lbstat,
                         null::text AS lbreasnd,
-                        coalesce(lb1."StdLow",lb1."LabLow") ::numeric   AS lbstnrlo,
+                        coalesce(lb1."StdLow",lb1."LabLow") ::numeric AS lbstnrlo,
                         coalesce(lb1."StdHigh",lb1."LabHigh") ::numeric AS lbstnrhi,
                         lb1."LabUnits"::text AS lborresu,
                         coalesce(lb1."StdValue", lb1."NumericValue")::numeric AS  lbstresn,
@@ -359,4 +366,7 @@ lb.lbseq::integer AS lbseq,
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM lb_data lb
 JOIN included_subjects s ON (lb.studyid = s.studyid AND lb.siteid = s.siteid AND lb.usubjid = s.usubjid);
+
+
+
 

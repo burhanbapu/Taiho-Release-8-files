@@ -38,6 +38,9 @@ WITH included_subjects AS (
                         "CMENDAT" ::timestamp without time zone AS cmendtc,
                         null::time without time zone AS cmsttm,
                         null::time without time zone AS cmentm
+                        ,"CMTRT_ATC"::text As CMATCTXT1,
+						"CMTRT_ATC2"::text As CMATCTXT2,
+						"CMTRT_ATC3"::text As CMATCTXT3
                         from tas117_201."CM" c  ),
 	
      site_data as (select distinct studyid,siteid,sitename,sitecountry,sitecountrycode,siteregion from site)
@@ -74,6 +77,9 @@ SELECT
         cm.cmendtc::timestamp without time zone AS cmendtc,
         cm.cmsttm::time without time zone AS cmsttm,
         cm.cmentm::time without time zone AS cmentm
+        ,cm.CMATCTXT1::text As CMATCTXT1,
+		cm.CMATCTXT2::text As CMATCTXT2,
+		cm.CMATCTXT3::text As CMATCTXT3
         /*KEY , (cm.studyid || '~' || cm.siteid || '~' || cm.usubjid || '~' || cm.cmseq)::text  AS objectuniquekey KEY*/
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM cm_data cm

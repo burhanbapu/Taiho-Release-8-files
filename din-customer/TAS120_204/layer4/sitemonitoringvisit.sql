@@ -8,44 +8,30 @@ WITH included_sites AS (
  
      sitemonitoringvisit_data AS (
 			select studyid,
-				 siteid,
-				 visitname,
-				 visitdate,
-				 smvipyn,
-				 smvpiyn,
-				 smvtrvld,
-				 smvtrvlu,
-				 smvvtype,
-				 smvmethd from
-				 (
-				 select studyid,
-				 siteid,
-				 visitname,
-				 visitdate,
-				 smvipyn,
-				 smvpiyn,
-				 smvtrvld,
-				 smvtrvlu,
-				 smvvtype,
-				 smvmethd, 
-				 row_number() over (partition by siteid,studyid,visitname order by visitdate desc ) as rank
-			from(	 
-		        SELECT  'TAS120_204'::text AS studyid,
-                        concat('TAS120_204_', right(site_number,3)) ::text AS siteid,
-                        visit_name ::text AS visitname,
-						coalesce(nullif(sv."visit_completed_date",''),nullif(sv."planned_visit_date",''),nullif(sv."visit_start_date",''))::date AS visitdate,
-                        null::text AS smvipyn,
-                        null::text AS smvpiyn,
-                        ((nullif(visit_completed_date ,'')::date)-nullif(visit_start_date,'')::date)::text as smvtrvld,
-                        'days'::text AS smvtrvlu,
-                        visit_type ::text AS smvvtype,
-                        visit_category ::text AS smvmethd
-                 from tas120_204_ctms.site_visits sv
-                 where visit_start_date is not null
-                )a
-			)sv
-			 where rank = 1
-        )
+				   siteid,
+				   visitname||'~'||row_number()over(partition by visitname,siteid ORDER by visitdate,smvvtype ASC) as visitname,
+				   visitdate,
+				   smvipyn,
+				   smvpiyn,
+				   smvtrvld,
+				   smvtrvlu,
+				   smvvtype,
+				   smvmethd
+			from (
+						SELECT  'TAS120_204'::text AS studyid,
+								concat('TAS120_204_', right(site_number,3)) ::text AS siteid,
+								visit_name ::text AS visitname,
+								coalesce(nullif(sv."visit_completed_date",''),nullif(sv."planned_visit_date",''),nullif(sv."visit_start_date",''))::date AS visitdate,
+								null::text AS smvipyn,
+								null::text AS smvpiyn,
+								((nullif(visit_completed_date ,'')::date)-nullif(visit_start_date,'')::date)::text as smvtrvld,
+								'days'::text AS smvtrvlu,
+								visit_type ::text AS smvvtype,
+								visit_category ::text AS smvmethd
+						from tas120_204_ctms.site_visits sv
+						where visit_start_date is not null
+				)r          
+								)
 
 SELECT 
         /*KEY (smv.studyid || '~' || smv.siteid)::text AS comprehendid, KEY*/

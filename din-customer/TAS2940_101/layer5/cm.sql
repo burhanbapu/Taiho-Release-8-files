@@ -9,7 +9,7 @@ WITH included_subjects AS (
      cm_data AS (
                 SELECT  "project"::text AS studyid,
                         'TAS2940_101'::text AS studyname,
-                        concat(concat("project",'_'),substring("SiteNumber",9,11))::text AS siteid,
+                        'TAS2940_101_' || split_part("SiteNumber",'_',2)::text AS siteid,
                         null::text AS sitename,
                         null::text AS sitecountry,
                         null::text AS sitecountrycode,
@@ -38,6 +38,9 @@ WITH included_subjects AS (
                         "CMENDAT"::timestamp without time zone AS cmendtc,
                         null::time without time zone AS cmsttm,
                         null::time without time zone AS cmentm 
+                        ,"CMTRT_ATC"::text As CMATCTXT1,
+						"CMTRT_ATC2"::text As CMATCTXT2,
+						"CMTRT_ATC3"::text As CMATCTXT3	 
                         from  TAS2940_101."CM" ),
 						
 				site_data as (select distinct studyid,siteid,sitename,sitecountry,sitecountrycode,siteregion from site)
@@ -74,6 +77,9 @@ SELECT
         cm.cmendtc::timestamp without time zone AS cmendtc,
         cm.cmsttm::time without time zone AS cmsttm,
         cm.cmentm::time without time zone AS cmentm
+        ,cm.CMATCTXT1::text As CMATCTXT1,
+		cm.CMATCTXT2::text As CMATCTXT2,
+		cm.CMATCTXT3::text As CMATCTXT3
         /*KEY , (cm.studyid || '~' || cm.siteid || '~' || cm.usubjid || '~' || cm.cmseq)::text  AS objectuniquekey KEY*/
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM cm_data cm
