@@ -32,7 +32,7 @@ WITH included_studies AS (
                         Case when "active"='Yes' then (case when site_status = 'Dropped' then 'Cancelled' else site_status end)
 							 else 'Inactive'
 						end::text AS sitestatus,
-                        null::date AS sitestatusdate
+                        nullif(ms."planned_date",'')::date AS sitestatusdate
                         
                         from TAS2940_101.__sites s
                         left join tas2940_101_ctms.milestone_status_site ms 
@@ -74,3 +74,4 @@ JOIN included_studies st ON (s.studyid = st.studyid)
 LEFT JOIN sitecountrycode_data cc ON (s.studyid = cc.studyid AND LOWER(s.sitecountry)=LOWER(cc.countryname_iso));
 
 
+select planned_date from tas2940_101_ctms.milestone_status_site ms 

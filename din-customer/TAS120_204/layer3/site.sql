@@ -30,7 +30,10 @@ WITH included_studies AS (
 						Case when "active"='Yes' then (case when site_status = 'Dropped' then 'Cancelled' else site_status end)
 							 else 'Inactive'
 						end AS sitestatus,
-                        null::date AS sitestatusdate
+                        case when lower(site_status)='activated' then sm.site_activated_date
+                        	 when lower(site_status)='selected' then sm.site_selected_date
+                        	 when lower(site_status) in ('back-up','dropped','recommended') then coalesce(nullif(sm.site_activated_date,''),nullif(sm.site_selected_date,'')) 
+                        end::date AS sitestatusdate
                         from tas120_204.__sites
                         left join tas120_204_ctms.sites sm
 						on split_part("name",'_',1) = split_part(sm."site_number",'_',2)
