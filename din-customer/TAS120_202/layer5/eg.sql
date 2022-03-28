@@ -59,10 +59,10 @@ WITH included_subjects AS (
            null::time without time zone AS egtm   
 FROM       "tas120_202"."ECG" eg
 CROSS JOIN lateral( VALUES 
-       (concat("instanceId",1),'RR Interval',"ECGRR"::text , "ECGRR_Units" , "ECGRR_Units" , "ECGRR"::text ),
-       (concat("instanceId",2),'HR',"ECGHR"::text , "ECGHR_Units" , "ECGHR_Units" , "ECGHR"::text ),
-	   (concat("instanceId",3),'QT Interval',"ECGQT"::text , "ECGQT_Units" , "ECGQT_Units" , "ECGQT"::text ),
-	   (concat("instanceId",4),'QTc Interval',"ECGQTC"::text , "ECGQTC_Units" , "ECGQTC_Units" , "ECGQTC"::text )
+       (concat("instanceId",12),'RR Interval',"ECGRR"::text , "ECGRR_Units" , "ECGRR_Units" , "ECGRR"::text ),
+       (concat("instanceId",23),'HR',"ECGHR"::text , "ECGHR_Units" , "ECGHR_Units" , "ECGHR"::text ),
+	   (concat("instanceId",34),'QT Interval',"ECGQT"::text , "ECGQT_Units" , "ECGQT_Units" , "ECGQT"::text ),
+	   (concat("instanceId",45),'QTc Interval',"ECGQTC"::text , "ECGQTC_Units" , "ECGQTC_Units" , "ECGQTC"::text )
        ) AS t 
        (egseq,egscat,egorres, egorresu, egstresu, egstresn ))eg
      )

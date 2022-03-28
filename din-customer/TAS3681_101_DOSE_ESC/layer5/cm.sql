@@ -15,7 +15,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
 					  'TAS3681_101_DOSE_ESC'::text AS studyname,
                         "SiteNumber"::text AS siteid,
                         "Subject"::text AS usubjid,
-                        concat("RecordPosition","PageRepeatNumber")::integer AS cmseq,
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::integer AS cmseq,
                         "CMTRT"::text AS cmtrt,
                         "CMTRT_TN"::text AS cmmodify,
                         "CMTRT_PT"::text AS cmdecod,

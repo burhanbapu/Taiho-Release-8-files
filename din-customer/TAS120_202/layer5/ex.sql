@@ -15,7 +15,7 @@ WITH included_subjects AS (
                         "Subject"::text AS usubjid,
                        -- (row_number() over (partition by "project","SiteNumber","Subject" order by  "EXOSTDAT","EXOENDAT"))::int AS exseq,
 					   /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [exstdtc,exsttm]))::int AS exseq,*/
-					   concat("instanceId","RecordPosition")::int as exseq,
+					   concat("instanceId","PageRepeatNumber","RecordPosition")::int as exseq,
                         --"FolderName"::text AS visit,
 						trim(REGEXP_REPLACE
 							(REGEXP_REPLACE

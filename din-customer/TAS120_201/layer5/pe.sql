@@ -11,7 +11,7 @@ WITH included_subjects AS (
                         "SiteNumber"::text AS siteid,
                         "Subject"::text AS usubjid,
                        -- row_number() OVER (PARTITION BY "studyid", "siteid", "Subject" ORDER BY "serial_id")::int AS peseq,
-					   "instanceId"::int AS peseq,
+					   concat("RecordPosition","instanceId","PageRepeatNumber")::int AS peseq,
                         'PE'::text AS petestcd,
                         'Physical Examination'::text AS petest,
                         'Physical Examination'::text AS pecat,

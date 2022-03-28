@@ -19,9 +19,10 @@ WITH included_studies AS (
                         case when "name" like '%201_Gustave Roussy_201%' then 'Europe'
                         else 'North America' end::text AS siteregion,
                         'TRUE'::text as statusapplicable,
-                        null::date AS sitecreationdate,
-                        null::date AS siteactivationdate,
-                        null::date AS sitedeactivationdate,
+                        effectivedate::date AS sitecreationdate,
+                        effectivedate::date AS siteactivationdate,
+                        case when lower(ms.closeout_status) = 'site closeout' then ms.cov_visit_end_date
+                        else null end::date AS sitedeactivationdate,
                         null::text AS siteinvestigatorname,
                         null::text AS sitecraname,
                         null::text AS siteaddress1,
@@ -29,14 +30,14 @@ WITH included_studies AS (
                         null::text AS sitecity,
                         null::text AS sitestate,
                         null::text AS sitepostal,
-                        Case when "active"='Yes' then (case when site_status = 'Dropped' then 'Cancelled' else site_status end)
+                        Case when "active"='Yes' then (case when ms.site_status = 'Dropped' then 'Cancelled' else ms.site_status end)
 							 else 'Inactive'
 						end::text AS sitestatus,
-                        nullif(ms."planned_date",'')::date AS sitestatusdate
+                        nullif(ms.siv_plannned_date::text,'')::date AS sitestatusdate
                         
                         from TAS2940_101.__sites s
-                        left join tas2940_101_ctms.milestone_status_site ms 
-                        on split_part(s."name",'_',1) = ms.site_number
+                        left join tas2940_101_ctms.site_closeout ms 
+                        on split_part(s."name",'_',1) = ms.site_id
                         ),
 
     sitecountrycode_data AS (
@@ -74,4 +75,3 @@ JOIN included_studies st ON (s.studyid = st.studyid)
 LEFT JOIN sitecountrycode_data cc ON (s.studyid = cc.studyid AND LOWER(s.sitecountry)=LOWER(cc.countryname_iso));
 
 
-select planned_date from tas2940_101_ctms.milestone_status_site ms 

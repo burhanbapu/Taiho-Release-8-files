@@ -40,7 +40,7 @@ SELECT
         SELECT 
         "SiteNumber"::text	AS	siteid,
         "Subject"::text	AS	usubjid,
-        concat("RecordId","RecordPosition")::INT  AS exseq,
+        concat("instanceId","PageRepeatNumber","RecordPosition")::INT  AS exseq,
         "project"::text	AS	studyid,
         trim(REGEXP_REPLACE
 			(REGEXP_REPLACE
@@ -75,7 +75,7 @@ SELECT
         SELECT 
         "SiteNumber"::text	AS	siteid,
         "Subject"::text	AS	usubjid,
-       	concat("RecordId","RecordPosition")::INT  AS exseq,
+       	concat("PageRepeatNumber","instanceId","RecordPosition")::INT  AS exseq,
         "project"::text	AS	studyid,
         trim(REGEXP_REPLACE
 			(REGEXP_REPLACE

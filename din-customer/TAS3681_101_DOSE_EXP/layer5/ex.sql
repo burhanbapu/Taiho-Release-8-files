@@ -61,7 +61,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
                'TAS3681_101_DOSE_EXP'::				text      AS studyid,
                 ex."SiteNumber"::	text      AS siteid,
                 ex."Subject"::	text      AS usubjid,
-                concat("instanceId","RecordPosition")::int AS exseq,
+                concat("instanceId","PageRepeatNumber","RecordPosition")::int AS exseq,
                REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE("InstanceName",'<WK[0-9]D[0-9]/>\sEscalation',''),'<WK[0-9]D[0-9][0-9]/>\sEscalation',''),'Escalation',''):: text as visit,
                 'TAS3681'::					text      AS extrt,
                 'Prostate Cancer'::					text      AS excat,
@@ -87,7 +87,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
                 'TAS3681_101_DOSE_EXP'::				text      AS studyid,
                 ex2."SiteNumber"::	text      AS siteid,
                 ex2."Subject"::	text      AS usubjid,
-                concat("instanceId","RecordPosition")::int AS exseq,
+                concat("PageRepeatNumber","instanceId","RecordPosition")::int AS exseq,
                REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE("InstanceName",'<WK[0-9]D[0-9]/>\sEscalation',''),'<WK[0-9]D[0-9][0-9]/>\sEscalation',''),'Escalation',''):: text as visit,
                 'TAS3681'::					text      AS extrt,
                 'Prostate Cancer'::					text      AS excat,
@@ -145,4 +145,6 @@ FROM ex_data ex
 JOIN included_subjects s ON (ex.studyid = s.studyid AND ex.siteid = s.siteid AND ex.usubjid = s.usubjid)
 JOIN included_sites si ON (ex.studyid = si.studyid AND ex.siteid = si.siteid)
 ;
+
+
 

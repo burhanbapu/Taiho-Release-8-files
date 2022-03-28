@@ -72,7 +72,7 @@ CASE
     WHEN "AEREL" IN ('possibly related','definitely related','probably related','Related') THEN 'Yes'
     WHEN "AEREL" IN('unrelated','Not Reasonably Possible','Not Related') THEN 'No'
     ELSE 'Unknown' END::text as aerelnst,
-concat("RecordPosition","PageRepeatNumber")::int AS aeseq ,
+concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS aeseq ,
 "AESTDAT"::timestamp without time zone AS aesttm ,
 "AEENDAT"::timestamp without time zone AS aeentm ,
 "AETERM_LLT"::text AS aellt ,
@@ -119,7 +119,7 @@ case when lower("AESER")='yes' then 'Serious'
 CASE WHEN "AEREL" IN ('possibly related','definitely related','probably related','Related') THEN 'Yes'
      WHEN "AEREL" IN('unrelated','Not Reasonably Possible','Not Related') THEN 'No'
     ELSE 'Unknown' END::text as aerelnst,
-concat("RecordPosition","PageRepeatNumber")::int AS aeseq,
+concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS aeseq,
 "AESTDAT"::timestamp without time zone AS aesttm,
 "AEENDAT"::timestamp without time zone AS aeentm,
 "AETERM_LLT"::text AS aellt,

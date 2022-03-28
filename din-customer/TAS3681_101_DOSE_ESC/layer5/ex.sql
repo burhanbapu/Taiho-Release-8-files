@@ -55,7 +55,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
                'TAS3681_101_DOSE_ESC'::				text      AS studyid,
                 ex."SiteNumber"::	text      AS siteid,
                 ex."Subject"::	text      AS usubjid,
-                concat("instanceId","RecordPosition")::int AS exseq,
+                concat("instanceId","PageRepeatNumber","RecordPosition")::int AS exseq,
              --  REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE("InstanceName",'<WK[0-9]D[0-9]/>\sEscalation',''),'<WK[0-9]D[0-9][0-9]/>\sEscalation',''),'Escalation',''):: text as visit,
                 trim(REGEXP_REPLACE
 					(REGEXP_REPLACE
@@ -106,7 +106,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
                 'TAS3681_101_DOSE_ESC'::				text      AS studyid,
                 ex2."SiteNumber"::	text      AS siteid,
                 ex2."Subject"::	text      AS usubjid,
-                concat("instanceId","RecordPosition")::int AS exseq,
+                concat("PageRepeatNumber","instanceId","RecordPosition")::int AS exseq,
               -- REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE("InstanceName",'<WK[0-9]D[0-9]/>\sEscalation',''),'<WK[0-9]D[0-9][0-9]/>\sEscalation',''),'Escalation',''):: text as visit,
                 trim(REGEXP_REPLACE
 					(REGEXP_REPLACE

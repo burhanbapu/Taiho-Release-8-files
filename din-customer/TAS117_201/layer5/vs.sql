@@ -36,14 +36,14 @@ WITH included_subjects AS (
                     from tas117_201."VS" v 
                     cross join lateral(
                     values
-                    (concat("instanceId",1),'Diastolic Blood Pressure'	, 'VSDBP' ,  "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
-					(concat("instanceId",2),'Systolic Blood Pressure'	, ' VSSBP' , "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
-					(concat("instanceId",3),'Pressure Rate'				, 'VSPR'  ,  "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
-					(concat("instanceId",4),'Respiratory Rate'			, 'VSRESP', "VSRESP"	,"VSRESP_Units"	  ,"VSRESP"	,"VSRESP_Units"),
-					(concat("instanceId",5),'Temperature'				, 'VSTEMP',  "VSTEMP"	,"VSTEMP_Units"	  ,"VSTEMP"	,"VSTEMP_Units"),
-					(concat("instanceId",6),'Weight'					, 'VSWT'  ,  "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
-					(concat("instanceId",7),'Height'					, 'VSHT'  ,  "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units"),
-					(concat("instanceId",8), 'BMI'						, 'VSBMI' ,  "VSBMI"    , ''			  , "VSBMI" , '')
+                    (concat("instanceId",12),'Diastolic Blood Pressure'	, 'VSDBP' ,  "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
+					(concat("instanceId",34),'Systolic Blood Pressure'	, ' VSSBP' , "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
+					(concat("instanceId",56),'Pressure Rate'				, 'VSPR'  ,  "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
+					(concat("instanceId",78),'Respiratory Rate'			, 'VSRESP', "VSRESP"	,"VSRESP_Units"	  ,"VSRESP"	,"VSRESP_Units"),
+					(concat("instanceId",90),'Temperature'				, 'VSTEMP',  "VSTEMP"	,"VSTEMP_Units"	  ,"VSTEMP"	,"VSTEMP_Units"),
+					(concat("instanceId",13),'Weight'					, 'VSWT'  ,  "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
+					(concat("instanceId",46),'Height'					, 'VSHT'  ,  "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units"),
+					(concat("instanceId",79), 'BMI'						, 'VSBMI' ,  "VSBMI"    , ''			  , "VSBMI" , '')
                     
                     )as t (vsseq,vstest,vstestcd,vsorres,vsorresu,vsstresn,vsstresu) )
 

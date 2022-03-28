@@ -29,7 +29,7 @@ WITH included_subjects AS (
 						WHEN ae."AEREL" IN('unrelated','Not Reasonably Possible','Not Related') THEN 'No'
 						ELSE 'Unknown' END::text as aerelnst,
                        --ROW_NUMBER () OVER (PARTITION BY "project", ae."SiteNumber", ae."Subject" ORDER BY ae."AESTDAT")::int AS aeseq,
-                       concat("RecordPosition","PageRepeatNumber")::int AS aeseq,
+                       concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS aeseq,
                        "AESTDAT"::timestamp without time zone AS aesttm,
                        "AEENDAT"::timestamp without time zone AS aeentm,
 					  null::text AS aellt,

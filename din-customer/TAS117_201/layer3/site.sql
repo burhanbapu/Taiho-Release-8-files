@@ -43,8 +43,8 @@ WITH included_studies AS (
                 		else 'UNKNOWN'	 
                 		end::text AS siteregion,
 						True::BOOLEAN AS statusapplicable,
-                        null::date AS sitecreationdate,
-                        null::date AS siteactivationdate,
+                        s.effectivedate::date AS sitecreationdate,
+                        s.effectivedate::date AS siteactivationdate,
                         null::date AS sitedeactivationdate,
                         null::text AS siteinvestigatorname,
                         null::text AS sitecraname,
@@ -101,4 +101,5 @@ SELECT
 FROM site_data s 
 JOIN included_studies st ON (s.studyid = st.studyid)
 LEFT JOIN sitecountrycode_data cc ON (s.studyid = cc.studyid AND LOWER(s.sitecountry)=LOWER(cc.countryname_iso));
+
 

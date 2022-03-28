@@ -10,7 +10,7 @@ WITH included_subjects AS (
                 SELECT  project ::text AS studyid,
                         concat(project,substring("SiteNumber",position('_' in "SiteNumber")))::text AS siteid,
                         "Subject" ::text AS usubjid,
-                        "instanceId" ::int AS peseq,
+                        concat("RecordPosition","instanceId","PageRepeatNumber")::int AS peseq,
                         'PE'::text AS petestcd,
                         'Physical Examination'::text AS petest,
                         'Physical Examination'::text AS pecat,

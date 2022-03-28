@@ -88,11 +88,11 @@ NULL::text AS egblfl,
           FROM  tas3681_101."ECG"
                              cross join lateral(
 values
-(concat(concat("instanceId","RecordPosition"),'1'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
-(concat(concat("instanceId","RecordPosition"),'2'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
-(concat(concat("instanceId","RecordPosition"),'3'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
-(concat(concat("instanceId","RecordPosition"),'4'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
-(concat(concat("instanceId","RecordPosition"),'5'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
+(concat(concat("instanceId","RecordPosition"),'12'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
+(concat(concat("instanceId","RecordPosition"),'23'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
+(concat(concat("instanceId","RecordPosition"),'34'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
+(concat(concat("instanceId","RecordPosition"),'45'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
+(concat(concat("instanceId","RecordPosition"),'56'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
 )as t
 (egseq,egtestcd,egtest, egorres, egorresu, egstresn, egstresu)
 )a
@@ -136,11 +136,11 @@ NULL::text AS egblfl,
                              FROM  tas3681_101."ECG2"
                              cross join lateral(
 values
-(concat(concat("instanceId","RecordPosition"),'1'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
-(concat(concat("instanceId","RecordPosition"),'2'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
-(concat(concat("instanceId","RecordPosition"),'3'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
-(concat(concat("instanceId","RecordPosition"),'4'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
-(concat(concat("instanceId","RecordPosition"),'5'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
+(concat(concat("instanceId","RecordPosition"),'13'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
+(concat(concat("instanceId","RecordPosition"),'24'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
+(concat(concat("instanceId","RecordPosition"),'35'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
+(concat(concat("instanceId","RecordPosition"),'46'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
+(concat(concat("instanceId","RecordPosition"),'57'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
 )as t
 (egseq,egtestcd,egtest, egorres, egorresu, egstresn, egstresu)
 )a
@@ -184,11 +184,11 @@ REGEXP_REPLACE(REGEXP_REPLACE(REGEXP_REPLACE("InstanceName",'<WK[0-9]D[0-9]/>\sE
                              FROM  tas3681_101."ECG3"
                              cross join lateral(
 values
-(concat(concat("instanceId","RecordPosition"),'1'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
-(concat(concat("instanceId","RecordPosition"),'2'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
-(concat(concat("instanceId","RecordPosition"),'3'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
-(concat(concat("instanceId","RecordPosition"),'4'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
-(concat(concat("instanceId","RecordPosition"),'5'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
+(concat(concat("instanceId","RecordPosition"),'14'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
+(concat(concat("instanceId","RecordPosition"),'25'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
+(concat(concat("instanceId","RecordPosition"),'36'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
+(concat(concat("instanceId","RecordPosition"),'47'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
+(concat(concat("instanceId","RecordPosition"),'58'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
 )as t
 (egseq,egtestcd,egtest, egorres, egorresu, egstresn, egstresu)
 )a
@@ -233,11 +233,11 @@ NULL::text AS egblfl,
             FROM  tas3681_101."ECG4"
                              cross join lateral(
 values
-(concat(concat("instanceId","RecordPosition"),'1'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
+(concat(concat("instanceId","RecordPosition"),'15'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
 --(concat(concat("instanceId","RecordPosition"),'2'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
-(concat(concat("instanceId","RecordPosition"),'3'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
-(concat(concat("instanceId","RecordPosition"),'4'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
-   (concat(concat("instanceId","RecordPosition"),'5'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
+(concat(concat("instanceId","RecordPosition"),'36'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
+(concat(concat("instanceId","RecordPosition"),'47'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units"),
+   (concat(concat("instanceId","RecordPosition"),'58'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
 )as t
 (egseq,egtestcd,egtest, egorres, egorresu, egstresn, egstresu)
 )a
@@ -282,11 +282,11 @@ NULL::text AS egblfl,
              FROM  tas3681_101."ECG5"
                              cross join lateral(
 values
-(concat(concat("instanceId","RecordPosition"),'1'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
+(concat(concat("instanceId","RecordPosition"),'16'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
 --(concat(concat("instanceId","RecordPosition"),'2'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
-(concat(concat("instanceId","RecordPosition"),'3'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
-(concat(concat("instanceId","RecordPosition"),'4'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units")
-, (concat(concat("instanceId","RecordPosition"),'5'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
+(concat(concat("instanceId","RecordPosition"),'37'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
+(concat(concat("instanceId","RecordPosition"),'48'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units")
+, (concat(concat("instanceId","RecordPosition"),'59'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
   )as t
 (egseq,egtestcd,egtest, egorres, egorresu, egstresn, egstresu)
 )a
@@ -331,11 +331,11 @@ NULL::text AS egblfl,
              FROM  tas3681_101."ECG6"
                              cross join lateral(
 values
-(concat(concat("instanceId","RecordPosition"),'1'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
+(concat(concat("instanceId","RecordPosition"),'17'),'ECGRR' , 'RR Interval' , "ECGRR" ,"ECGRR_Units"  ,"ECGRR" ,"ECGRR_Units"),
 --(concat(concat("instanceId","RecordPosition"),'2'),'ECQTCF', 'Derived QTcF Interval' , "ECQTCF" ,"ECQTCF_Units"  ,"ECQTCF" ,"ECQTCF_Units"),
-(concat(concat("instanceId","RecordPosition"),'3'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
-(concat(concat("instanceId","RecordPosition"),'4'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units")
-, (concat(concat("instanceId","RecordPosition"),'5'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
+(concat(concat("instanceId","RecordPosition"),'38'),'ECGHR' , 'HR' , "ECGHR"   ,"ECGHR_Units"  ,"ECGHR" ,"ECGHR_Units"),
+(concat(concat("instanceId","RecordPosition"),'49'),'ECGQT' , 'QT Interval' , "ECGQT" ,"ECGQT_Units"  ,"ECGQT" ,"ECGQT_Units")
+, (concat(concat("instanceId","RecordPosition"),'50'),'ECGQTC', 'QTc Interval' , "ECGQTC" ,"ECGQTC_Units"  ,"ECGQTC" ,"ECGQTC_Units")
   )as t
 (egseq,egtestcd,egtest, egorres, egorresu, egstresn, egstresu)
 )a
@@ -405,7 +405,7 @@ case when "EGTESTCD" = 'EGHRMN' then 2 end),
 case when "EGTESTCD" = 'INTP' then "EGORRESU" else null end ,
 case when "EGTESTCD" = 'INTP' then "EGORRES1" else null end ,
 case when "EGTESTCD" = 'INTP' then "EGORRESU" else null end,
-case when "EGTESTCD" = 'INTP' then 1 end)
+case when "EGTESTCD" = 'INTP' then 156 end)
 )as t
 (egtestcd,egtest, egorres, egorresu, egstresn, egstresu,egseq)
 where (egtestcd is not null and  
@@ -519,5 +519,4 @@ FROM   eg_data eg
 JOIN   included_subjects s
 ON     (eg.studyid = s.studyid AND eg.siteid = s.siteid AND eg.usubjid = s.usubjid)
 ;
-
 

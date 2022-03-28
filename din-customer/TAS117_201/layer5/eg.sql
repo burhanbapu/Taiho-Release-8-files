@@ -36,11 +36,11 @@ WITH included_subjects AS (
                         from tas117_201."ECG" e 
                         cross join lateral(
                         values
-                        (concat("RecordId",1),'ECGRR','RR Interval','ECG','RR Interval',"PRINTERV","PRINTERV_Units","PRINTERV","PRINTERV_Units"),
-                        (concat("RecordId",2),'ECGQTCF','QTCF Interval','ECG','QTCF Interval',"QTCFINTER" ,"QTCFINTER_Units","QTCFINTER" ,"QTCFINTER_Units"),
-                        (concat("RecordId",3),'ECGHR','Heart Rate','ECG','Heart Rate',"HRTRATE" ,"HRTRATE_Units","HRTRATE" ,"HRTRATE_Units"),
-                        (concat("RecordId",4),'ECGQT','QT Interval','ECG','QT Interval',"QTINTERV","QTINTERV_Units","QTINTERV","QTINTERV_Units"),
-                        (concat("RecordId",5),'ECGPR','PR Interval','ECG','PR Interval',"PRINTERV","PRINTERV_Units","PRINTERV","PRINTERV_Units")
+                        (concat("RecordId",12),'ECGRR','RR Interval','ECG','RR Interval',"PRINTERV","PRINTERV_Units","PRINTERV","PRINTERV_Units"),
+                        (concat("RecordId",23),'ECGQTCF','QTCF Interval','ECG','QTCF Interval',"QTCFINTER" ,"QTCFINTER_Units","QTCFINTER" ,"QTCFINTER_Units"),
+                        (concat("RecordId",34),'ECGHR','Heart Rate','ECG','Heart Rate',"HRTRATE" ,"HRTRATE_Units","HRTRATE" ,"HRTRATE_Units"),
+                        (concat("RecordId",45),'ECGQT','QT Interval','ECG','QT Interval',"QTINTERV","QTINTERV_Units","QTINTERV","QTINTERV_Units"),
+                        (concat("RecordId",56),'ECGPR','PR Interval','ECG','PR Interval',"PRINTERV","PRINTERV_Units","PRINTERV","PRINTERV_Units")
                         
                         ) as eg (egseq,egtestcd,egtest,egcat,egscat,egorres,egorresu,egstresn,egstresu)
 
@@ -75,11 +75,11 @@ WITH included_subjects AS (
                         from tas117_201."ECGCD" e 
                         cross join lateral(
                         values
-                        (concat("RecordId",1),'ECGRR','RR Interval','ECG - Triplicate Assessments',"ECGCTP","ECGRRI" ,'msec',"ECGRRI" ,'msec'),
-                        (concat("RecordId",2),'ECGQTCF','QTCF Interval','ECG - Triplicate Assessments',"ECGCTP","ECGQTCF",'msec',"ECGQTCF",'msec'),
-                        (concat("RecordId",3),'ECGHR','Heart Rate','ECG - Triplicate Assessments',"ECGCTP","ECGHRAT" ,'bpm',"ECGHRAT" ,'bpm'),
-                        (concat("RecordId",4),'ECGQT','QT Interval','ECG - Triplicate Assessments',"ECGCTP","ECGQTI" ,'msec',"ECGQTI" ,'msec'),
-                        (concat("RecordId",5),'ECGPR','PR Interval','ECG - Triplicate Assessments',"ECGCTP","ECGPRI",'msec',"ECGPRI",'msec')
+                        (concat("RecordId",13),'ECGRR','RR Interval','ECG - Triplicate Assessments',"ECGCTP","ECGRRI" ,'msec',"ECGRRI" ,'msec'),
+                        (concat("RecordId",24),'ECGQTCF','QTCF Interval','ECG - Triplicate Assessments',"ECGCTP","ECGQTCF",'msec',"ECGQTCF",'msec'),
+                        (concat("RecordId",35),'ECGHR','Heart Rate','ECG - Triplicate Assessments',"ECGCTP","ECGHRAT" ,'bpm',"ECGHRAT" ,'bpm'),
+                        (concat("RecordId",46),'ECGQT','QT Interval','ECG - Triplicate Assessments',"ECGCTP","ECGQTI" ,'msec',"ECGQTI" ,'msec'),
+                        (concat("RecordId",57),'ECGPR','PR Interval','ECG - Triplicate Assessments',"ECGCTP","ECGPRI",'msec',"ECGPRI",'msec')
                         
                         ) as eg (egseq,egtestcd,egtest,egcat,egscat,egorres,egorresu,egstresn,egstresu)  )
 
@@ -107,10 +107,8 @@ SELECT
         /*KEY , (eg.studyid || '~' || eg.siteid || '~' || eg.usubjid || '~' || eg.egseq)::text  AS objectuniquekey KEY*/
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM eg_data eg
-JOIN included_subjects s ON (eg.studyid = s.studyid AND eg.siteid = s.siteid AND eg.usubjid = s.usubjid);
-
-
-
+JOIN included_subjects s ON (eg.studyid = s.studyid AND eg.siteid = s.siteid AND eg.usubjid = s.usubjid)
+;
 
 
 

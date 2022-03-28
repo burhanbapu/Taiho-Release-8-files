@@ -36,12 +36,12 @@ WITH included_subjects AS (
                     from tas120_204."VS" v 
                     cross join lateral(
 							values
-					(concat("instanceId",1),'Diastolic Blood Pressure'	, 'VSDBP' , 'Vital Signs','Vital Signs', "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
-					(concat("instanceId",2),'Systolic Blood Pressure'	, ' VSSBP' , 'Vital Signs','Vital Signs', "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
-					(concat("instanceId",3),'Pressure Rate'			, 'VSPR'  , 'Vital Signs','Vital Signs', "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
-					(concat("instanceId",4),'Temperature'				, 'VSTEMP', 'Vital Signs','Vital Signs', "VSTEMP"	,"VSTEMP_Units"	  ,"VSTEMP"	,"VSTEMP_Units"),
-					(concat("instanceId",5),'Weight'					, 'VSWT'  , 'Vital Signs','Vital Signs', "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
-					(concat("instanceId",6),'Height'					, 'VSHT'  , 'Vital Signs','Vital Signs', "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units")
+					(concat("instanceId",12),'Diastolic Blood Pressure'	, 'VSDBP' , 'Vital Signs','Vital Signs', "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
+					(concat("instanceId",34),'Systolic Blood Pressure'	, ' VSSBP' , 'Vital Signs','Vital Signs', "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
+					(concat("instanceId",56),'Pressure Rate'			, 'VSPR'  , 'Vital Signs','Vital Signs', "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
+					(concat("instanceId",78),'Temperature'				, 'VSTEMP', 'Vital Signs','Vital Signs', "VSTEMP"	,"VSTEMP_Units"	  ,"VSTEMP"	,"VSTEMP_Units"),
+					(concat("instanceId",90),'Weight'					, 'VSWT'  , 'Vital Signs','Vital Signs', "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
+					(concat("instanceId",13),'Height'					, 'VSHT'  , 'Vital Signs','Vital Signs', "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units")
 					
 							)as t (vsseq,vstest,vstestcd,vscat,vsscat,vsorres,vsorresu,vsstresn,vsstresu) )
 

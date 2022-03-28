@@ -35,7 +35,7 @@ WITH included_subjects AS (
 							 when "AEREL" ='Not Related' then 'No'
 							 else 'Unknown'
 							 end::text AS aerelnst,
-                        concat("PageRepeatNumber","RecordPosition")::int AS aeseq,
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS aeseq ,
                         "AESTDAT"::time without time zone AS aesttm,
                         "AEENDAT" ::time without time zone AS aeentm,
                         "AETERM_LLT" ::text AS aellt,

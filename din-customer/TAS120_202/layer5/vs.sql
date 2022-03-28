@@ -58,13 +58,13 @@ WITH included_subjects AS (
 							FROM "tas120_202"."VS" vs
 							cross join lateral(
 							values
-					(concat("instanceId",123),'Diastolic Blood Pressure'	, 'VSDBP' , 'Vital Signs','Vital Signs', "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
-					(concat("instanceId",234),'Systolic Blood Pressure'	, '1_VSSBP' , 'Vital Signs','Vital Signs', "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
-					(concat("instanceId",345),'Pressure Rate'			, 'VSPR'  , 'Vital Signs','Vital Signs', "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
-					(concat("instanceId",456),'Respiratory Rate'			, 'VSRESP', 'Vital Signs','Vital Signs', "VSRESP"	,"VSRESP_Units"	  ,"VSRESP"	,"VSRESP_Units"),
-					(concat("instanceId",567),'Temperature'				, 'VSTEMP', 'Vital Signs','Vital Signs', "VSTEMP"	,"VSTEMP_Units"	  ,"VSTEMP"	,"VSTEMP_Units"),
-					(concat("instanceId",678),'Weight'					, 'VSWT'  , 'Vital Signs','Vital Signs', "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
-					(concat("instanceId",789),'Height'					, 'VSHT'  , 'Vital Signs','Vital Signs', "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units")
+					(concat("instanceId",12),'Diastolic Blood Pressure'	, 'VSDBP' , 'Vital Signs','Vital Signs', "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
+					(concat("instanceId",34),'Systolic Blood Pressure'	, '1_VSSBP' , 'Vital Signs','Vital Signs', "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
+					(concat("instanceId",56),'Pressure Rate'			, 'VSPR'  , 'Vital Signs','Vital Signs', "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
+					(concat("instanceId",78),'Respiratory Rate'			, 'VSRESP', 'Vital Signs','Vital Signs', "VSRESP"	,"VSRESP_Units"	  ,"VSRESP"	,"VSRESP_Units"),
+					(concat("instanceId",90),'Temperature'				, 'VSTEMP', 'Vital Signs','Vital Signs', "VSTEMP"	,"VSTEMP_Units"	  ,"VSTEMP"	,"VSTEMP_Units"),
+					(concat("instanceId",13),'Weight'					, 'VSWT'  , 'Vital Signs','Vital Signs', "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
+					(concat("instanceId",46),'Height'					, 'VSHT'  , 'Vital Signs','Vital Signs', "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units")
 					
 							)as t
 								(vsseq,vstest,vstestcd,vscat,vsscat,vsorres,vsorresu,vsstresn,vsstresu)

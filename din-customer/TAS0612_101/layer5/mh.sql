@@ -11,7 +11,7 @@ WITH included_subjects AS (
 				SELECT  "project"::text AS studyid,
                         concat(concat("project",'_'),split_part("SiteNumber",'_',2))::text AS siteid,
                         "Subject"::text AS usubjid,
-                        concat("RecordPosition","PageRepeatNumber")::int AS mhseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [mhstdtc,mhsttm]))::int AS mhseq,*/
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS mhseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [mhstdtc,mhsttm]))::int AS mhseq,*/
                         "MHTERM"::text AS mhterm,
                         "MHTERM_PT"::text AS mhdecod,
                         "MHTERM_SOC"::text AS mhcat,

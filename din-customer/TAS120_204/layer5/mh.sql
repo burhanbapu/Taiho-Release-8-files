@@ -10,7 +10,7 @@ WITH included_subjects AS (
                 SELECT  project::text AS studyid,
                         project||substring("SiteNumber",position ('_' in "SiteNumber"))::text AS siteid,
                         "Subject"::text AS usubjid,
-                        concat("PageRepeatNumber" ,"RecordPosition") ::int AS mhseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [mhstdtc,mhsttm]))::int AS mhseq,*/
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber") ::int AS mhseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [mhstdtc,mhsttm]))::int AS mhseq,*/
                         null::text AS mhspid,
                         "MHTERM"::text AS mhterm,
                         "MHTERM_PT"::text AS mhdecod,

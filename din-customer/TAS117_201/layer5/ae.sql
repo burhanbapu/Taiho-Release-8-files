@@ -35,7 +35,7 @@ WITH included_subjects AS (
                         	 when lower("AEREL") in ('not related','unrelated') then 'No'
                         	 else 'Missing'
                         end::text AS aerelnst,
-                        concat("RecordPosition","PageRepeatNumber")::int AS aeseq,
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS aeseq ,
                         "AESTDAT" ::time without time zone AS aesttm,
                         "AEENDAT" ::time without time zone AS aeentm,
                         "AETERM_LLT" ::text AS aellt,

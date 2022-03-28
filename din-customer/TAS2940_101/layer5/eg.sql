@@ -11,7 +11,7 @@ WITH included_subjects AS (
 				SELECT distinct project ::text AS studyid,
                         project||substring("SiteNumber",position ('_' in "SiteNumber")) ::text AS siteid,
                         "Subject" ::text AS usubjid,
-                        concat(concat("instanceId","RecordPosition"),2) ::int AS egseq,
+                        concat(concat("instanceId","RecordPosition"),1) ::int AS egseq,
                         'ECG Timepoint'::text AS egtestcd,
                         'ECG Timepoint'::text AS egtest,
                         'ECG'::text AS egcat,

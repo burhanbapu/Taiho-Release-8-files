@@ -153,7 +153,7 @@ WITH included_subjects AS (SELECT DISTINCT studyid, siteid, usubjid FROM subject
                     vs.visit::text                        AS visit,
                     vs.vsdtc::TIMESTAMP without TIME zone AS lbdtc,
                     NULL::INTEGER                         AS lbdy,
-                    vs.vsseq::INT                         AS lbseq,
+                    concat(vs.vsseq,0)::INT                         AS lbseq,
                     vs.vstestcd::text                     AS lbtestcd,
                     vs.vstest::text                       AS lbtest,
                     vs.vscat::text                        AS lbcat,
@@ -194,7 +194,7 @@ WITH included_subjects AS (SELECT DISTINCT studyid, siteid, usubjid FROM subject
                     ex.visit::text                          AS visit,
                     ex.exstdtc::TIMESTAMP without TIME zone AS lbdtc,
                     NULL::INTEGER                           AS lbdy,
-                    concat(ex.exseq,1)::numeric         AS lbseq,
+                    ex.exseq::numeric         AS lbseq,
                     'EXPOSURE'::text                        AS lbtestcd,
                     'EXPOSURE'::text                        AS lbtest,
                     'EXPOSURE'::text                        AS lbcat,
@@ -235,7 +235,7 @@ WITH included_subjects AS (SELECT DISTINCT studyid, siteid, usubjid FROM subject
                     eg.visit::text                        AS visit,
                     eg.egdtc::TIMESTAMP without TIME zone AS lbdtc,
                     NULL::INTEGER                         AS lbdy,
-                    concat(eg.egseq,2)::INT                         AS lbseq,
+                    eg.egseq::INT                         AS lbseq,
                     eg.egtestcd::text                     AS lbtestcd,
                     eg.egtest::text                       AS lbtest,
                     eg.egcat::text                        AS lbcat,
@@ -363,7 +363,8 @@ SELECT
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM lb_data lb
 JOIN included_subjects s ON (lb.studyid = s.studyid AND lb.siteid = s.siteid AND lb.usubjid = s.usubjid)
-LEFT JOIN included_site si ON (lb.studyid = si.studyid AND lb.siteid = si.siteid);
+LEFT JOIN included_site si ON (lb.studyid = si.studyid AND lb.siteid = si.siteid)
+;
 
  
 

@@ -1,3 +1,7 @@
+/*
+CCDM LB mapping
+Notes: Standard mapping to CCDM LB table
+*/
 
 WITH
     included_subjects AS
@@ -237,7 +241,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
                     vs.visit::text                        AS visit,
                     vs.vsdtc::TIMESTAMP without TIME zone AS lbdtc,
                     NULL::INTEGER                         AS lbdy,
-                    vs.vsseq::INT                         AS lbseq,
+                    concat(vs.vsseq,0)::INT                         AS lbseq,
                     vs.vstestcd::text                     AS lbtestcd,
                     vs.vstest::text                       AS lbtest,
                     vs.vscat::text                        AS lbcat,
@@ -278,7 +282,7 @@ SELECT DISTINCT studyid, siteid, sitename, sitecountry,sitecountrycode, siteregi
                     ex.visit::text                          AS visit,
                     ex.exstdtc::TIMESTAMP without TIME zone AS lbdtc,
                     NULL::INTEGER                           AS lbdy,
-                    concat(ex.exseq,08)::INT                           AS lbseq,
+                    ex.exseq::INT                           AS lbseq,
                     'EXPOSURE'::text                        AS lbtestcd,
                     'EXPOSURE'::text                        AS lbtest,
                     'EXPOSURE'::text                        AS lbcat,
@@ -455,7 +459,8 @@ ON
         lb.studyid = s.studyid
     AND lb.siteid = s.siteid
     AND lb.usubjid = s.usubjid)
-	JOIN included_sites si ON (lb.studyid = si.studyid AND lb.siteid = si.siteid);
+	JOIN included_sites si ON (lb.studyid = si.studyid AND lb.siteid = si.siteid)
+;
 	
 	
 	

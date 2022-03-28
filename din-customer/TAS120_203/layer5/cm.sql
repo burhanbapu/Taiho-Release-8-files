@@ -15,7 +15,7 @@ WITH included_subjects AS (
                         null::text AS sitecountrycode,
                         null::text AS siteregion,
                         "Subject"::text AS usubjid,
-                        concat("RecordPosition","PageRepeatNumber") ::integer AS cmseq,
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber") ::integer AS cmseq,
                         null::text AS cmspid,
                         "CMTRT"::text AS cmtrt,
                         "CMTRT_TN"::text AS cmmodify,

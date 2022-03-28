@@ -11,11 +11,11 @@ WITH included_subjects AS (
                     eg.siteid,
                     eg.usubjid,
                     --(row_number() over (partition by eg.studyid, eg.siteid, eg.usubjid order by eg.egseq, eg.egdtc))::int AS egseq,
-					case when egtest = 'RR Interval' then concat(egseq,1)
-					when egtest = 'Derived QTcF Interval' then concat(egseq,2)
-					when egtest = 'HR' then concat(egseq,3)
-					when egtest = 'QT Interval' then concat(egseq,4)
-					when egtest in ('QTcF','QTcB') then concat(egseq,5) end::int as egseq,
+					case when egtest = 'RR Interval' then concat(egseq,12)
+					when egtest = 'Derived QTcF Interval' then concat(egseq,23)
+					when egtest = 'HR' then concat(egseq,34)
+					when egtest = 'QT Interval' then concat(egseq,45)
+					when egtest in ('QTcF','QTcB') then concat(egseq,56) end::int as egseq,
                     eg.egtestcd,
                     eg.egtest,
                     eg.egcat,

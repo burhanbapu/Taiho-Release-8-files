@@ -13,7 +13,7 @@ WITH included_subjects AS (
                         null::text AS sitename,
                         null::text AS sitecountry,
                         "Subject" ::text AS usubjid,
-                        concat("instanceId","RecordPosition") ::int AS exseq, 
+                        concat("instanceId","PageRepeatNumber","RecordPosition") ::int AS exseq, 
                         /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [exstdtc,exsttm]))::int AS exseq,*/
                         trim(REGEXP_REPLACE
 			(REGEXP_REPLACE
@@ -49,7 +49,7 @@ WITH included_subjects AS (
                         null::text AS sitename,
                         null::text AS sitecountry,
                         "Subject" ::text AS usubjid,
-                        concat("instanceId","RecordPosition") ::int AS exseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [exstdtc,exsttm]))::int AS exseq,*/
+                        concat("PageRepeatNumber","instanceId","RecordPosition") ::int AS exseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [exstdtc,exsttm]))::int AS exseq,*/
                         trim(REGEXP_REPLACE
 			(REGEXP_REPLACE
 			(REGEXP_REPLACE
@@ -113,4 +113,5 @@ SELECT
 FROM ex_data ex
 JOIN included_subjects s ON (ex.studyid = s.studyid AND ex.siteid = s.siteid AND ex.usubjid = s.usubjid)
 join site_data sd on (ex.studyid = sd.studyid AND ex.siteid = sd.siteid);
+
 

@@ -36,13 +36,13 @@ WITH included_subjects AS (
                     from tas120_203."VS" v 
                     cross join lateral(
 							values
-					(concat("instanceId",1),'Diastolic Blood Pressure'	, 'VSDBP' , 'Vital Signs','Vital Signs', "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
-					(concat("instanceId",2),'Systolic Blood Pressure'	, ' VSSBP' , 'Vital Signs','Vital Signs', "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
-					(concat("instanceId",3),'Pressure Rate'			, 'VSPR'  , 'Vital Signs','Vital Signs', "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
-					(concat("instanceId",4),'Respiratory Rate'			, 'VSRESP', 'Vital Signs','Vital Signs', "VSRESP"	,"VSRESP_Units"	  ,"VSRESP"	,"VSRESP_Units"),
-					(concat("instanceId",5),'Temperature'				, 'VSTEMP', 'Vital Signs','Vital Signs', "VSTEMP"	,REPLACE("VSTEMP_Units",'^o','')	  ,"VSTEMP"	,REPLACE("VSTEMP_Units",'^o','')),
-					(concat("instanceId",6),'Weight'					, 'VSWT'  , 'Vital Signs','Vital Signs', "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
-					(concat("instanceId",7),'Height'					, 'VSHT'  , 'Vital Signs','Vital Signs', "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units")
+					(concat("instanceId",12),'Diastolic Blood Pressure'	, 'VSDBP' , 'Vital Signs','Vital Signs', "VSDBP"	,"VSDBP_Units"	  ,"VSDBP"	,"VSDBP_Units"),
+					(concat("instanceId",34),'Systolic Blood Pressure'	, ' VSSBP' , 'Vital Signs','Vital Signs', "VSSBP"	,"VSSBP_Units"	  ,"VSSBP"	,"VSSBP_Units"),
+					(concat("instanceId",56),'Pressure Rate'			, 'VSPR'  , 'Vital Signs','Vital Signs', "VSPR"	    ,"VSPR_Units"	  ,"VSPR"	,"VSPR_Units"),
+					(concat("instanceId",78),'Respiratory Rate'			, 'VSRESP', 'Vital Signs','Vital Signs', "VSRESP"	,"VSRESP_Units"	  ,"VSRESP"	,"VSRESP_Units"),
+					(concat("instanceId",90),'Temperature'				, 'VSTEMP', 'Vital Signs','Vital Signs', "VSTEMP"	,REPLACE("VSTEMP_Units",'^o','')	  ,"VSTEMP"	,REPLACE("VSTEMP_Units",'^o','')),
+					(concat("instanceId",13),'Weight'					, 'VSWT'  , 'Vital Signs','Vital Signs', "VSWT"		,"VSWT_Units"	  ,"VSWT"	,"VSWT_Units"),
+					(concat("instanceId",46),'Height'					, 'VSHT'  , 'Vital Signs','Vital Signs', "VSHT"		,"VSHT_Units"	  ,"VSHT"	,"VSHT_Units")
 					
 							)as t (vsseq,vstest,vstestcd,vscat,vsscat,vsorres,vsorresu,vsstresn,vsstresu) )
 

@@ -25,8 +25,8 @@ WITH included_studies AS (
 					'104_Comprehensive Cancer Centers of Nevada') then 'North America' 
 					else 'Europe' end::text AS siteregion,
                         'TRUE'::text as statusapplicable,
-                        null::date AS sitecreationdate,
-                        null::date AS siteactivationdate,
+                        effectivedate::date AS sitecreationdate,
+                        effectivedate::date AS siteactivationdate,
                         null::date AS sitedeactivationdate,
                         null::text AS siteinvestigatorname,
                         null::text AS sitecraname,

@@ -10,7 +10,7 @@ WITH included_subjects AS (
 				SELECT  'TAS3681_101_DOSE_ESC'::text AS studyid,
                         "SiteNumber"::text AS siteid,
                         "Subject"::text AS usubjid,
-                        concat("RecordPosition","PageRepeatNumber")::int AS mhseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [mhstdtc,mhsttm]))::int AS mhseq,*/
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::int AS mhseq, /*(row_number() over (partition by [studyid],[siteid],[usubjid] order [mhstdtc,mhsttm]))::int AS mhseq,*/
                         "MHTERM"::text AS mhterm,
                         "MHTERM_PT"::text AS mhdecod,
                         "MHTERM_SOC"::text AS mhcat,

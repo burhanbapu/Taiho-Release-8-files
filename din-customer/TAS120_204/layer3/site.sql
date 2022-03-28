@@ -16,8 +16,8 @@ WITH included_studies AS (
                         null::text AS sitecountrycode,
                         'North America'::text AS siteregion,
                         'TRUE'::text as statusapplicable,
-                        null::date AS sitecreationdate,
-                        null::date AS siteactivationdate,
+                        effectivedate::date AS sitecreationdate,
+                        effectivedate::date AS siteactivationdate,
                         null::date AS sitedeactivationdate,
                         null::text AS siteinvestigatorname,
                         null::text AS sitecraname,
@@ -71,5 +71,6 @@ SELECT
 FROM site_data s 
 JOIN included_studies st ON (s.studyid = st.studyid)
 LEFT JOIN sitecountrycode_data cc ON (s.studyid = cc.studyid AND LOWER(s.sitecountry)=LOWER(cc.countryname_iso));
+
 
 

@@ -40,7 +40,7 @@ WITH included_subjects AS (
 						concat('TAS0612_101_',split_part("SiteNumber",'_',2))::text AS siteid,
                         --substring(trim("Subject"),0,8)::text AS usubjid,
                         "Subject"::text AS usubjid,
-                        concat("RecordPosition","PageRepeatNumber")::integer AS cmseq,
+                        concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber")::integer AS cmseq,
                         coalesce(nullif("CMTRT",''),'Missing')::text AS cmtrt,
                         "CMTRT_TN"::text AS cmmodify,
                         "CMTRT_PT"::text AS cmdecod,

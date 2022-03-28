@@ -13,7 +13,7 @@ WITH included_subjects AS (
                 SELECT  "project"::text AS studyid,
                         "SiteNumber"::text AS siteid,
                         "Subject"::text AS usubjid,
-                        concat("RecordPosition","PageRepeatNumber")::integer AS cmseq,
+                         concat("RecordPosition","InstanceRepeatNumber","PageRepeatNumber") ::integer AS cmseq,
                         "CMTRT"::text AS cmtrt,
                         "CMTRT_TN"::text AS cmmodify,
                         "CMTRT_PT"::text AS cmdecod,

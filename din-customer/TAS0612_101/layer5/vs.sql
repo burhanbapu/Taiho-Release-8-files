@@ -11,13 +11,13 @@ WITH included_subjects AS (
                      studyid,
                      siteid, 
                      usubjid,
-                     case when vstest='Diastolic Blood Pressure' then concat(vsseq,1)
-                          when vstest='Systolic Blood Pressure'  then concat(vsseq,2)
-                          when vstest='Pulse Rate'  then concat(vsseq,3)
-                          when vstest='Respiratory Rate'  then concat(vsseq,4)
-                          when vstest='Temperature'  then concat(vsseq,5)
-                          when vstest='Weight'  then concat(vsseq,6)
-                          when vstest='Height'  then concat(vsseq,7)
+                     case when vstest='Diastolic Blood Pressure' then concat(vsseq,12)
+                          when vstest='Systolic Blood Pressure'  then concat(vsseq,34)
+                          when vstest='Pulse Rate'  then concat(vsseq,56)
+                          when vstest='Respiratory Rate'  then concat(vsseq,78)
+                          when vstest='Temperature'  then concat(vsseq,90)
+                          when vstest='Weight'  then concat(vsseq,13)
+                          when vstest='Height'  then concat(vsseq,46)
                      end ::int as vsseq,
                      --(row_number() over (partition by studyid, siteid, usubjid order by vsdtc, vstm))::int as vsseq,
                      --vsseq,
