@@ -11,8 +11,8 @@ WITH included_subjects AS (
                         project||substring("SiteNumber",position ('_' in "SiteNumber"))::text AS siteid,
                         "Subject" ::text AS usubjid,
                         concat("instanceId",12) ::int AS egseq,
-                        'ECG'::text AS egtestcd,
-                        'ECG'::text AS egtest,
+                        'ECGQTCF'::text AS egtestcd,
+                        'QTCF Interval'::text AS egtest,
                         'ECG'::text AS egcat,
                         'Derived QTcF Interval'::text AS egscat,
                         null::text AS egpos,
@@ -40,8 +40,8 @@ WITH included_subjects AS (
                         project||substring("SiteNumber",position ('_' in "SiteNumber")) ::text AS siteid,
                         "Subject" ::text AS usubjid,
                         concat("instanceId",23) ::int AS egseq,
-                        'ECG'::text AS egtestcd,
-                        'ECG'::text AS egtest,
+                        'ECGHR'::text AS egtestcd,
+                        'Heart Rate'::text AS egtest,
                         'ECG'::text AS egcat,
                         'HR'::text AS egscat,
                         null::text AS egpos,
@@ -70,8 +70,8 @@ WITH included_subjects AS (
                         project||substring("SiteNumber",position ('_' in "SiteNumber")) ::text AS siteid,
                         "Subject" ::text AS usubjid,
                         concat("instanceId",34) ::int AS egseq,
-                        'ECG'::text AS egtestcd,
-                        'ECG'::text AS egtest,
+                        'ECGQT'::text AS egtestcd,
+                        'QT Interval'::text AS egtest,
                         'ECG'::text AS egcat,
                         'QT Interval'::text AS egscat,
                         null::text AS egpos,
@@ -119,4 +119,7 @@ SELECT
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM eg_data eg
 JOIN included_subjects s ON (eg.studyid = s.studyid AND eg.siteid = s.siteid AND eg.usubjid = s.usubjid);
+
+
+
 

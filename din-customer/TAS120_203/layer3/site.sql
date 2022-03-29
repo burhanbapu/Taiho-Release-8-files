@@ -5,29 +5,25 @@ Notes: Standard mapping to CCDM Site table
 
 WITH included_studies AS (
                 SELECT studyid FROM study ),
+                
+sitecountrycode_data AS (
+                SELECT studyid, countryname_iso, countrycode3_iso FROM studycountry ),
 
     site_data AS (
+                select b.*, sr.siteregion::text AS siteregion from (
+                select a.*, 
+                cc.countrycode3_iso::text AS sitecountrycode from (
                 SELECT  distinct 'TAS120_203'::text AS studyid,
                         null::text AS studyname,
                         'TAS120_203_' || split_part("name",'_',1)::text AS siteid,
                         split_part("name",'_',2)::text AS sitename,
                         'PXL'::text AS croid,
                         'PXL'::text AS sitecro,
-                       case when "name" in ('101_Dana Farber Cancer Institute',
-					'102_UCSF Medical Center',
-					'103_Henry Ford Hospital',
-					'104_Comprehensive Cancer Centers of Nevada') then 'United States' 
-						else 'Spain' end::text AS sitecountry,
-                        null::text AS sitecountrycode,
-                        case when "name" in ('101_Dana Farber Cancer Institute',
-					'102_UCSF Medical Center',
-					'103_Henry Ford Hospital',
-					'104_Comprehensive Cancer Centers of Nevada') then 'North America' 
-					else 'Europe' end::text AS siteregion,
-                        'TRUE'::text as statusapplicable,
-                        effectivedate::date AS sitecreationdate,
-                        effectivedate::date AS siteactivationdate,
-                        null::date AS sitedeactivationdate,
+                         cn.country::text AS sitecountry,
+                        TRUE::text as statusapplicable,
+                        sm.actual_selected::date AS sitecreationdate,
+                        nullif(sm.actual_activation,'')::date AS siteactivationdate,
+                        nullif(sm.actual_closeout,'')::date AS sitedeactivationdate,
                         null::text AS siteinvestigatorname,
                         null::text AS sitecraname,
                         null::text AS siteaddress1,
@@ -35,18 +31,26 @@ WITH included_studies AS (
                         null::text AS sitecity,
                         null::text AS sitestate,
                         null::text AS sitepostal,
-                        Case when "active"='Yes' then sm.closeout_status
-							 else 'Inactive'
-						end::text AS sitestatus,
-                        null::date AS sitestatusdate 
+                        sm.closeout_status::text AS sitestatus,
+                        case when sm.closeout_status = 'Recruiting' then sm.actual_activation
+                             when sm.closeout_status = 'Start Up' then sm.actual_srp
+                             when sm.closeout_status = 'Cancelled' then sm.actual_qual
+                        end::date AS sitestatusdate 
                         from tas120_203.__sites
                         left join tas120_203_ctms.site_milestones sm on 
                         split_part("name",'_',1) = sm.site_number
-                        ),
-
-    sitecountrycode_data AS (
-                SELECT studyid, countryname_iso, countrycode3_iso FROM studycountry )
-
+						left join tas120_203_ctms.center cn on 
+						split_part("name",'_',1) = cn.site_number
+                        )a 
+                		left join sitecountrycode_data cc 
+                		on a.studyid = cc.studyid 
+                		AND LOWER(a.sitecountry)=LOWER(cc.countrycode3_iso)
+                		)b 
+                		left join internal_config.site_region_config sr
+				        on b.sitecountrycode = sr.alpha_3_code
+                		)
+                		
+                		
 SELECT 
         /*KEY (s.studyid || '~' || s.siteid)::text AS comprehendid, KEY*/
         s.studyid::text AS studyid,
@@ -55,10 +59,11 @@ SELECT
         s.sitename::text AS sitename,
         s.croid::text AS croid,
         s.sitecro::text AS sitecro,
-        case when s.sitecountry='United States' then 'United States of America'
+        /*case when s.sitecountry='United States' then 'United States of America'
         else s.sitecountry
-        end::text AS sitecountry,
-        cc.countrycode3_iso::text AS sitecountrycode,
+        end::text AS sitecountry,*/
+        s.sitecountry::text AS sitecountry,
+        s.sitecountrycode::text AS sitecountrycode,
         s.siteregion::text AS siteregion,
         s.sitecreationdate::date AS sitecreationdate,
         s.siteactivationdate::date AS siteactivationdate,
@@ -75,7 +80,8 @@ SELECT
 		s.statusapplicable::BOOLEAN as statusapplicable
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM site_data s 
-JOIN included_studies st ON (s.studyid = st.studyid)
-LEFT JOIN sitecountrycode_data cc ON (s.studyid = cc.studyid AND LOWER(s.sitecountry)=LOWER(cc.countryname_iso));
+JOIN included_studies st ON (s.studyid = st.studyid);
+
+
 
  
