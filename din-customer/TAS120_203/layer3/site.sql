@@ -10,7 +10,10 @@ sitecountrycode_data AS (
                 SELECT studyid, countryname_iso, countrycode3_iso FROM studycountry ),
 
     site_data AS (
-                select b.*, sr.siteregion::text AS siteregion from (
+                select b.*, 
+                sr.siteregion::text AS siteregion,
+                sr.country_name::text AS sitecountry 
+                from (
                 select a.*, 
                 cc.countrycode3_iso::text AS sitecountrycode from (
                 SELECT  distinct 'TAS120_203'::text AS studyid,
@@ -19,7 +22,7 @@ sitecountrycode_data AS (
                         split_part("name",'_',2)::text AS sitename,
                         'PXL'::text AS croid,
                         'PXL'::text AS sitecro,
-                         cn.country::text AS sitecountry,
+                         cn.country::text AS sitecountry1,
                         TRUE::text as statusapplicable,
                         sm.actual_selected::date AS sitecreationdate,
                         nullif(sm.actual_activation,'')::date AS siteactivationdate,
@@ -44,12 +47,12 @@ sitecountrycode_data AS (
                         )a 
                 		left join sitecountrycode_data cc 
                 		on a.studyid = cc.studyid 
-                		AND LOWER(a.sitecountry)=LOWER(cc.countrycode3_iso)
+                		AND LOWER(a.sitecountry1)=LOWER(cc.countrycode3_iso)
                 		)b 
                 		left join internal_config.site_region_config sr
 				        on b.sitecountrycode = sr.alpha_3_code
                 		)
-                		
+                		                		
                 		
 SELECT 
         /*KEY (s.studyid || '~' || s.siteid)::text AS comprehendid, KEY*/
@@ -59,10 +62,10 @@ SELECT
         s.sitename::text AS sitename,
         s.croid::text AS croid,
         s.sitecro::text AS sitecro,
-        /*case when s.sitecountry='United States' then 'United States of America'
+        case when s.sitecountry='United States' then 'United States of America'
         else s.sitecountry
-        end::text AS sitecountry,*/
-        s.sitecountry::text AS sitecountry,
+        end::text AS sitecountry,
+        --s.sitecountry::text AS sitecountry,
         s.sitecountrycode::text AS sitecountrycode,
         s.siteregion::text AS siteregion,
         s.sitecreationdate::date AS sitecreationdate,
@@ -82,6 +85,3 @@ SELECT
 FROM site_data s 
 JOIN included_studies st ON (s.studyid = st.studyid);
 
-
-
- 
