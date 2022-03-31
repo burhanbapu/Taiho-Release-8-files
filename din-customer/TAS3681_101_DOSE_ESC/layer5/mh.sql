@@ -21,7 +21,7 @@ WITH included_subjects AS (
                         case when mhstdtc='' or mhstdtc like '%0000%' or mhstdtc like '%YYYY%' then null
 							else to_date(mhstdtc,'DD Mon YYYY') 
 						end ::date AS mhstdtc,
-						case when mhendtc='' or mhendtc like '%0000%' then null
+						case when mhendtc='' or mhendtc like '%0000%' or mhendtc like '%YYYY%' then null
 							else to_date(mhendtc,'DD Mon YYYY') 
 						end ::date AS mhendtc
                         from
