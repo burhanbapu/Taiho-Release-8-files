@@ -20,7 +20,7 @@ activationdate as( select site_number, case when ms.event_desc = 'Site Ready to 
 deactivationdate as( select site_number, case when ms.event_desc = 'Site Closed' then nullif(ms.actual_date,'')
                         end::date AS deactivationdate from tas2940_101_ctms.milestone_status_site ms where event_desc ='Site Closed'order by site_number ASC),
     site_data AS (
-                select b.*, sr.siteregion::text AS siteregion from (
+                select distinct b.*, sr.siteregion::text AS siteregion from (
                 select a.*,
                 cc.countrycode3_iso::text AS sitecountrycode from (  
                    

@@ -80,7 +80,7 @@ WITH included_subjects AS (
                         'Early EOT'::TEXT AS dsterm,
                         "EOTDAT" ::DATE AS dsstdtc
                         from tas120_203."EOT" eot
-                        where "EOTREAS" not in ('Treatment Completion' , 'Death') )
+                        where "EOTREAS" != 'Treatment Completion' )
                         
  union all 
 
@@ -91,11 +91,11 @@ WITH included_subjects AS (
                         "Subject" ::TEXT AS usubjid,
                         4.4::NUMERIC AS dsseq, --deprecated
                         'Completion'::TEXT AS dscat,
-                        null::TEXT AS dsscat,
+                        case when eos."EOSREAS" = '' or eos."EOSREAS" is null then 'Missing' else eos."EOSREAS" end::TEXT AS dsscat,
                         'Withdrawn'::TEXT AS dsterm,
                         "EOSDAT" ::DATE AS dsstdtc
                         from tas120_203."EOS" eos
-                        where "EOSREAS" not in ('Study Completion' ,'Death','Screen Failure'))
+                        where "EOSREAS" not in ('Study Completion' ,'Screen Failure'))
                         
  union all 
 
@@ -126,7 +126,8 @@ WITH included_subjects AS (
                         "VISITDAT" ::DATE AS dsstdtc
                         from tas120_203."IC" ic
                         where "IEYN"='Yes')
-                        
+ 
+/* 
  union all 
  
 --Disposition Event: Failed Randomization										 
@@ -155,7 +156,11 @@ WITH included_subjects AS (
                         'Discontinued before Treatment'::TEXT AS dsterm,
                         "EOSDAT" ::DATE AS dsstdtc
                         from tas120_203."EOS" eos
-                        where "EOSREAS"='Death'))
+                        where "EOSREAS"='Death')
+						
+						
+						*/
+						)
 
 SELECT
         /*KEY (ds.studyid || '~' || ds.siteid || '~' || ds.usubjid)::TEXT AS comprehendid, KEY*/

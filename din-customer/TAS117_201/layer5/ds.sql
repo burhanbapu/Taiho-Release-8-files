@@ -117,7 +117,8 @@ union all
                         null::TEXT AS epoch,
                         null::TIMESTAMP WITHOUT TIME ZONE AS dsdtc,
                         null::INTEGER AS dsstdy
-                        from tas117_201."EOT" e2 where "EOTREAS" not in ('Death','Treatment Completion')
+                        from tas117_201."EOT" e2 
+                        where "EOTREAS" !='Treatment Completion'
 union all  
 --Disposition Event: Withdrawn										                        
 						SELECT  project ::TEXT AS studyid,
@@ -125,7 +126,7 @@ union all
                         "Subject" ::TEXT AS usubjid,
                         4.4::NUMERIC AS dsseq, --deprecated
                         'Completion'::TEXT AS dscat,
-                        null::TEXT AS dsscat,
+                        case when e3."EOSREAS" = '' or e3."EOSREAS" is null then 'Missing' else e3."EOSREAS" end::TEXT AS dsscat,
                         'Withdrawn'::TEXT AS dsterm,
                         "EOSDAT"::DATE AS dsstdtc,  
                         null::TEXT AS dsgrpid,
@@ -138,7 +139,8 @@ union all
                         null::TEXT AS epoch,
                         null::TIMESTAMP WITHOUT TIME ZONE AS dsdtc,
                         null::INTEGER AS dsstdy
-                        from tas117_201."EOS" e3 where "EOSREAS" not in ('Death','Study Completion')
+                        from tas117_201."EOS" e3 
+                        where "EOSREAS" != 'Study Completion'
 union all  
 --Disposition Event: Study Completion                        
 						SELECT  project ::TEXT AS studyid,
@@ -181,7 +183,9 @@ union all
                         null::TEXT AS epoch,
                         null::TIMESTAMP WITHOUT TIME ZONE AS dsdtc,
                         null::INTEGER AS dsstdy
+
                         from tas117_201."IE" i where "IEYN" ='Yes'
+/*
 union all   
 --Disposition Event: Failed Randomization                        
 						SELECT  project ::TEXT AS studyid,
@@ -223,7 +227,10 @@ union all
                         null::TEXT AS epoch,
                         null::TIMESTAMP WITHOUT TIME ZONE AS dsdtc,
                         null::INTEGER AS dsstdy
-                        from tas117_201."EOS" e6 where "EOSREAS" ='Death')
+                        from tas117_201."EOS" e6 where "EOSREAS" ='Death'
+*/						
+						
+						)
 
 SELECT
         /*KEY (ds.studyid || '~' || ds.siteid || '~' || ds.usubjid)::TEXT AS comprehendid, KEY*/

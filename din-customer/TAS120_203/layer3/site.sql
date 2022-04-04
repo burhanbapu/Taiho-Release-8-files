@@ -10,7 +10,7 @@ sitecountrycode_data AS (
                 SELECT studyid, countryname_iso, countrycode3_iso FROM studycountry ),
 
     site_data AS (
-                select b.*, 
+                select distinct b.*, 
                 sr.siteregion::text AS siteregion,
                 sr.country_name::text AS sitecountry 
                 from (
@@ -84,4 +84,5 @@ SELECT
         /*KEY , now()::timestamp with time zone AS comprehend_update_time KEY*/
 FROM site_data s 
 JOIN included_studies st ON (s.studyid = st.studyid);
+
 

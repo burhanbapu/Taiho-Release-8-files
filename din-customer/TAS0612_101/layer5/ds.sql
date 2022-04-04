@@ -132,9 +132,9 @@ es."Subject"::text AS usubjid,
 'Completion'::text AS dscat,
 'Withdrawn'::text AS dsterm,
 es."EOSDAT"::DATE AS dsstdtc,
-case when es."EOSREAS" = '' then 'Missing' else es."EOSREAS" end ::text AS dsscat  
+case when es."EOSREAS" = '' or es."EOSREAS" is null then 'Missing' else es."EOSREAS" end ::text AS dsscat  
 from tas0612_101."EOS" es
-where es."EOSREAS" not in ('Study Completion','Death')
+where es."EOSREAS" != 'Study Completion'
 
 
 union all 
@@ -154,7 +154,7 @@ from tas0612_101."EOS" es
 where es."EOSREAS" = 'Study Completion'
 
 
-union all
+/*union all
 
 --Disposition Event: Failed Randomization
 
@@ -190,7 +190,7 @@ es."EOSDAT"::DATE AS dsstdtc,
 es."EOSREAS"::text AS dsscat  
 from tas0612_101."EOS" es
 where es."EOSREAS" = 'Death'
-
+*/
 )
 
 SELECT
@@ -216,7 +216,8 @@ SELECT
          /*KEY, (ds.studyid || '~' || ds.siteid || '~' || ds.usubjid || '~' || ds.dsseq)::TEXT  AS objectuniquekey KEY*/
         /*KEY , now()::TIMESTAMP WITH TIME ZONE AS comprehend_update_time KEY*/
 FROM ds_data ds
-JOIN included_subjects s ON (ds.studyid = s.studyid AND ds.siteid = s.siteid AND ds.usubjid = s.usubjid);
+JOIN included_subjects s ON (ds.studyid = s.studyid AND ds.siteid = s.siteid AND ds.usubjid = s.usubjid)
+;
 
 
 

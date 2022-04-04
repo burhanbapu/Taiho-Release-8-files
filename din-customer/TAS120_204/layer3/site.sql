@@ -9,7 +9,7 @@ sitecountrycode_data AS (
                 SELECT studyid, countryname_iso, countrycode3_iso FROM studycountry),
 
     site_data AS (
-                 select b.*, sr.siteregion::text AS siteregion from (
+                 select distinct  b.*, sr.siteregion::text AS siteregion from (
                 select a.*, 
                 cc.countrycode3_iso::text AS sitecountrycode from (
                  SELECT  distinct 'TAS120_204'::text AS studyid,

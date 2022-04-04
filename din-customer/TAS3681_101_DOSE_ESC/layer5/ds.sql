@@ -175,9 +175,9 @@ From   (
 SELECT  'TAS3681_101_DOSE_ESC'::text AS studyid,
 		ds."SiteNumber"::text AS siteid,
 		ds."Subject"::text AS usubjid,
-		4.4::NUMERIC AS dsseq, 
-		'Completion'::text AS dscat,
-		'Withdrawn'::text AS dsterm,
+		4.01::NUMERIC AS dsseq, 
+		'Treatment'::text AS dscat,
+		'Early EOT'::text AS dsterm,
 		ds."DSDAT"::DATE AS dsstdtc,
 		ds."DSREAS"::text AS dsscat  
 from 	tas3681_101."DS" ds
@@ -193,9 +193,9 @@ union all
 SELECT  'TAS3681_101_DOSE_ESC'::text AS studyid,
 		ds2."SiteNumber"::text AS siteid,
 		ds2."Subject"::text AS usubjid,
-		4.4::NUMERIC AS dsseq, 
-		'Completion'::text AS dscat,
-		'Withdrawn'::text AS dsterm,
+		4.01::NUMERIC AS dsseq, 
+		'Treatment'::text AS dscat,
+		'Early EOT'::text AS dsterm,
 		ds2."DSDAT"::DATE AS dsstdtc,
 		ds2."DSREAS"::text AS dsscat  
 from 	tas3681_101."DS2" ds2
@@ -204,9 +204,7 @@ where ("project","SiteNumber", "Subject", "serial_id")
 	select "project","SiteNumber", "Subject", max(serial_id)  as serial_id
 	from tas3681_101."DS"
 	group by 1,2,3
-	)) dm where usubjid not in 
-	(select distinct "Subject" from tas3681_101."EOS" es
-where es."EOSREAS" <> 'Study Completion')
+	)) dm 
 
 
 union all 
@@ -220,9 +218,9 @@ es."Subject"::text AS usubjid,
 'Completion'::text AS dscat,
 'Withdrawn'::text AS dsterm,
 es."EOSDAT"::DATE AS dsstdtc,
-case when es."EOSREAS" = '' then 'Missing' else es."EOSREAS" end ::text AS dsscat
+case when es."EOSREAS" = '' or es."EOSREAS" is null then 'Missing' else es."EOSREAS" end ::text AS dsscat
 from tas3681_101."EOS" es
-where es."EOSREAS" not in ('Study Completion','Death')
+where es."EOSREAS" != 'Study Completion'
 
 
 union all 
@@ -239,7 +237,7 @@ es."EOSDAT"::DATE AS dsstdtc,
 es."EOSREAS"::text AS dsscat  
 from tas3681_101."EOS" es
 where es."EOSREAS" = 'Study Completion'
-
+/*
 union all
 
 --Disposition Event: Failed Randomization
@@ -270,6 +268,7 @@ es."EOSDAT"::DATE AS dsstdtc,
 null::text AS dsscat
 from tas3681_101."EOS" es
 where es."EOSREAS" = 'Death'
+*/
 )
 
 SELECT
@@ -296,4 +295,5 @@ SELECT
         /*KEY , now()::TIMESTAMP WITH TIME ZONE AS comprehend_update_time KEY*/
 FROM ds_data ds
 JOIN included_subjects s ON (ds.studyid = s.studyid AND ds.siteid = s.siteid AND ds.usubjid = s.usubjid);
+
 

@@ -88,14 +88,12 @@ union all
 SELECT  "project"::TEXT AS studyid,
 ds."SiteNumber"::TEXT AS siteid,
 ds."Subject"::TEXT AS usubjid,
-4.4::NUMERIC AS dsseq, --deprecated
-'Completion'::TEXT AS dscat,
+4.01::NUMERIC AS dsseq, --deprecated
+'Treatment'::TEXT AS dscat,
 ds."DSREAS"::TEXT AS dsscat,
-'Withdrawn'::TEXT AS dsterm,
+'Early EOT'::TEXT AS dsterm,
 ds."DSDAT"::DATE AS dsstdtc
-from tas120_201."DS" ds where ds."Subject" not in 
-(select distinct "Subject" from tas120_201."EOS" eos
-WHERE "EOS_RSN" <> 'End of study per protocol' )
+from tas120_201."DS" ds 
 
 union all 
 --Disposition Event: Withdrawn
@@ -109,7 +107,7 @@ case when eos."EOS_RSN" = '' then 'Missing' else eos."EOS_RSN" end ::text AS dss
 'Withdrawn'::TEXT AS dsterm,
 eos."EOS_DAT"::DATE AS dsstdtc
 from tas120_201."EOS" eos
-WHERE "EOS_RSN" not in ('End of study per protocol','Death')
+WHERE "EOS_RSN" != 'End of study per protocol'
 
 union all 
 
@@ -126,7 +124,7 @@ eos."EOS_DAT"::DATE AS dsstdtc
 from tas120_201."EOS" eos
 WHERE "EOS_RSN" = 'End of study per protocol'
 
-
+/*
 union all
 
 --Disposition Event: Failed Randomization
@@ -156,6 +154,8 @@ null::TEXT AS dsscat,
 eos."EOS_DAT"::DATE AS dsstdtc
 from tas120_201."EOS" eos
 WHERE "EOS_RSN" = 'Death'
+*/
+
 )
 
 SELECT

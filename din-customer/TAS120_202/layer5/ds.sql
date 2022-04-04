@@ -119,13 +119,13 @@ WITH included_subjects AS (
 				SELECT  eos."project"::text AS studyid,
 						eos."SiteNumber"::text AS siteid,
 						eos."Subject"::text AS usubjid,
-						4.4::NUMERIC AS dsseq, 
+						4.1::NUMERIC AS dsseq, 
 						'Completion'::text AS dscat,
 						'Withdrawn'::text AS dsterm,
 						eos."EOSDAT"::DATE AS dsstdtc,
 						case when eos."EOSREAS" = '' then 'Missing' else eos."EOSREAS" end ::text AS dsscat
 				from "tas120_202"."EOS" eos
-				where eos."EOSREAS" not in ( 'End of study per protocol','Death')
+				where eos."EOSREAS" != 'End of study per protocol'
 				
 				union all 
 				
@@ -157,6 +157,7 @@ WITH included_subjects AS (
 				from "tas120_202"."EOS" eos
 				where eos."EOSREAS" = 'End of study per protocol'
 				
+				/*
 				union all
 					
 					--Disposition Event: Failed Randomization
@@ -188,7 +189,7 @@ WITH included_subjects AS (
 						null::text AS dsscat
 				from "tas120_202"."EOS" eos
 				where eos."EOSREAS" = 'Death'
-				
+				*/
 				)
 
 SELECT
