@@ -3,6 +3,7 @@ CCDM AE mapping
 Notes: Standard mapping to CCDM AE table
 */
 
+
 WITH included_subjects AS (
     SELECT DISTINCT studyid, siteid, usubjid FROM subject),
 included_site AS (
@@ -52,7 +53,7 @@ SELECT "project"::text AS studyid,
 					  "MinCreated":: date as aerptdt,
 					  nullif("AETERM_PT",''):: Text as preferredterm,
 					  null::boolean as aesi
-		    FROM TAS0612_101."AE2" ae 
+		    FROM TAS0612_101."AE" ae 
   )
 
 SELECT 
@@ -104,3 +105,7 @@ SELECT
 FROM ae_data ae
 JOIN included_subjects s ON (ae.studyid = s.studyid AND ae.siteid = s.siteid AND ae.usubjid = s.usubjid)
 JOIN included_site si ON (ae.studyid = si.studyid AND ae.siteid = si.siteid);
+
+
+
+
