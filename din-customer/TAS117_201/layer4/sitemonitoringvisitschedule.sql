@@ -12,7 +12,9 @@ WITH included_sites AS (
                         "visit_name"::text AS visitname,
                         "planned_visit_date"::date AS plannedvisitdate,
 						"visit_type"::text as smvvtype
-			from TAS117_201_ctms.site_visits)
+			from TAS117_201_ctms.site_visits
+			 where nullif("planned_visit_date",'') is not null
+             )
 
 SELECT 
         /*KEY (smvs.studyid || '~' || smvs.siteid)::text AS comprehendid, KEY*/
