@@ -1629,9 +1629,8 @@ Select		Distinct t.Study,
 			,nl.CountOfNL
 			,nl.nldate
 			,s.Status
-			,case when lower(status)='enrolled' then 'Ongoing'
-								 when lower(status)='withdrawn' then 'Discontinued'
-								 when lower(status)='completed' then 'Completed'
+			,case when lower(status) in ('enrolled','completed') then 'Ongoing'
+				  when lower(status) in ('early eot','withdrawn') then 'Discontinued'
 			 end "Subject Enrollment Status"
 			 
 From 		ALLDATA t
